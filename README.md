@@ -15,3 +15,9 @@ I constantly reset my passwords, and I use Google's password manager. I want som
 
 
 ## User Stories
+- As a user, I want to be able to create a new Password and add it to a Password Vault
+- As a user, I want to be able to select a Password Vault and add a new Password to it
+- As a user, I want to be able to select a Password Vault, select a website, and see all my account information for it.
+- As a user, I want to be able to select a website in my Password Vault, update my usernames, passwords, and user statistics for it all in one go.
+- As a user, I want to be able to see a dashboard of how many websites I have passwords for, how often I access certain websites passwords, and statistics about sites I never seem to access so I know when to delete accounts
+- As a user, I want seamless integration with my browser and my Password Vault, so I have to put in minimal effort when signing in.
