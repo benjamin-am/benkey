@@ -3,6 +3,9 @@ package model;
 // An can only have one account-website combo to store passwords. 
 public class Account {
     // fields
+    private Website website;
+    private String username;
+    private Password password;
 
     /* 
     REQUIRES: website, username, password are all length > 1.
@@ -10,35 +13,34 @@ public class Account {
     EFFECTS: sets up a new Account. Website is name of the website for the account;
             userName is username for that website; password is password for that website;
     */
-    public Account(Website website, String userName, String password) {
-        //stub
+    public Account(Website website, String username, String password) {
+        this.website = website;
+        this.username = username;
+        this.password = new Password(password);
     }
 
     public Password getPassword() {
-        //stub 
-        return new Password("");
+        return this.password;
     }
 
     public Website getWebsite() {
-        //stub 
-        return new Website("", "");
+        return this.website;
     }
 
     public String getUsername() {
-        //stub 
-        return "";
+        return this.username;
     }
 
     public void setPassword(String password) {
-        // stub
+        this.password = new Password(password);
     }
 
     public void setUsername(String username) {
-        // stub
+        this.username = username;
     }
 
     public void setWebsite(Website website) {
-        //stub
+        this.website = website;
     }
 
 }
