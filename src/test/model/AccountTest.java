@@ -18,26 +18,26 @@ public class AccountTest {
 
     @BeforeEach
     void runBefore() {
+        w1 = new Website("test", "test.com");
+        w2 = new Website("test1", "test.com1");
         a1 = new Account(w2, "a", "a");
         a2 = new Account(w1, "c", "d");
         a3 = new Account(w1, "f", "g");
-        w1 = new Website("test", "test.com");
-        w2 = new Website("test1", "test.com1");
     }
 
 
     @Test
     void testConstructor() {
         assertEquals(w2, a1.getWebsite());
-        assertEquals("a", a1.getPassword());
+        assertEquals("a", a1.getPassword().getPassword());
         assertEquals("a", a1.getUsername());
         
         assertEquals(w1, a2.getWebsite());
-        assertEquals("d", a2.getPassword());
+        assertEquals("d", a2.getPassword().getPassword());
         assertEquals("c", a2.getUsername());
 
         assertEquals(w1, a3.getWebsite());
-        assertEquals("g", a3.getPassword());
+        assertEquals("g", a3.getPassword().getPassword());
         assertEquals("f", a3.getUsername());
     }
 
@@ -57,20 +57,20 @@ public class AccountTest {
 
     @Test
     void testGetPassword() {
-        assertEquals("a", a1.getPassword());
-        assertEquals("d", a2.getPassword());
-        assertEquals("g", a3.getPassword());
+        assertEquals(new Password("a").getEncryptPassword(), a1.getPassword().getEncryptPassword());
+        assertEquals("d", a2.getPassword().getPassword());
+        assertEquals("g", a3.getPassword().getPassword());
     }
 
     @Test
     void testSetPassword() {
-        assertEquals("g", a3.getPassword());
+        assertEquals("g", a3.getPassword().getPassword());
 
         a3.setPassword("bad");
-        assertEquals("bad", a3.getPassword());
+        assertEquals("bad", a3.getPassword().getPassword());
         a3.setPassword("basdasdassda");
         a3.setPassword("pppppp");
-        assertEquals("pppppp", a3.getUsername());
+        assertEquals("pppppp", a3.getPassword().getPassword());
     }
 
     @Test
