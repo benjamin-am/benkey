@@ -10,7 +10,7 @@ public class Password {
 
     }
 
-    public void setPassword() {
+    public void setPassword(String pass) {
 
     }
 
@@ -18,17 +18,21 @@ public class Password {
         return "";
     }
 
+    public String getEncryptPassword() {
+        return "";
+    }
+
     /* 
     EFFECTS: creates an encrypted password
     */
-    public String encryptPassword() {
+    private String encryptPassword() {
         return "";
     }
 
     /* 
     EFFECTS: decrypts an encrypted password
     */
-    public String decryptPassword() {
+    private String decryptPassword() {
         return "";
     }
 
