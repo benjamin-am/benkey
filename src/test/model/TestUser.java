@@ -52,8 +52,8 @@ public class TestUser {
         assertEquals(3, u1.getListOfAccounts().size());
         assertFalse(u1.getListOfAccounts().isEmpty());
         assertEquals(a1, u1.getListOfAccounts().get(0));
-        assertEquals(a1, u1.getListOfAccounts().get(1));
-        assertEquals(a1, u1.getListOfAccounts().get(2));
+        assertEquals(a2, u1.getListOfAccounts().get(1));
+        assertEquals(a3, u1.getListOfAccounts().get(2));
     }
 
     @Test
@@ -118,17 +118,20 @@ public class TestUser {
         assertEquals(1, listUser.size());
         assertEquals("a", listUser.get(0));
         u1.addAccount(a2);
+        listUser = u1.listAllUsernames();
         assertEquals(2, listUser.size());
         assertEquals("a", listUser.get(0));
         assertEquals("c", listUser.get(1));
 
         u1.addAccount(a3);
+        listUser = u1.listAllUsernames();
         assertEquals(3, listUser.size());
         assertEquals("a", listUser.get(0));
         assertEquals("c", listUser.get(1));
         assertEquals("f", listUser.get(2));
 
         u1.addAccount(a4);
+        listUser = u1.listAllUsernames();
         assertEquals(3, listUser.size());
         assertEquals("a", listUser.get(0));
         assertEquals("c", listUser.get(1));
