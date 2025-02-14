@@ -6,21 +6,22 @@ public class Account {
 
     /* 
     REQUIRES: website, username, password are all length > 1.
+             website string is everything between www. and .com.
     EFFECTS: sets up a new Account. Website is name of the website for the account;
             userName is username for that website; password is password for that website;
     */
-    public Account(String website, String userName, String password) {
+    public Account(Website website, String userName, String password) {
         //stub
     }
 
     public Password getPassword() {
         //stub 
-        return new Password();
+        return new Password("");
     }
 
     public Website getWebsite() {
         //stub 
-        return new Website();
+        return new Website("", "");
     }
 
     public String getUsername() {
@@ -36,7 +37,7 @@ public class Account {
         // stub
     }
 
-    public void setWebsite(String website) {
+    public void setWebsite(Website website) {
         //stub
     }
 
