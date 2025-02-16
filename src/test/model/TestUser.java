@@ -145,4 +145,20 @@ public class TestUser {
         assertFalse(u1.verifyPassword("Test"));
     }
 
+    @Test
+    void testNumberOfAccountsOnWebsite() {
+        u1.addAccount(a1);
+        assertEquals(0, u1.numberOfAccountsOnWebsite(w1));
+        assertEquals(1, u1.numberOfAccountsOnWebsite(w2));
+        u1.addAccount(a2);
+        assertEquals(1, u1.numberOfAccountsOnWebsite(w1));
+        assertEquals(1, u1.numberOfAccountsOnWebsite(w2));
+        u1.addAccount(a3);
+        assertEquals(1, u1.numberOfAccountsOnWebsite(w1));
+        assertEquals(2, u1.numberOfAccountsOnWebsite(w2));
+        u1.addAccount(a4);
+        assertEquals(1, u1.numberOfAccountsOnWebsite(w1));
+        assertEquals(3, u1.numberOfAccountsOnWebsite(w2));
+    }
+
 }
