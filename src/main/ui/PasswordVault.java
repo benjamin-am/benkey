@@ -1,9 +1,5 @@
 package ui; 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,38 +12,44 @@ public class PasswordVault {
     private User user;
     
     public PasswordVault() {
-        System.out.println("Welcome to benkey, a super cool password vault");
-        printDivider();
         init();
-        System.out.println("Would you like to login or make a new user profile?");
-        printDivider();
-        displayLoginMenu();
         String input = "";
         while (!(input.equals("q") || input.equals("l") || input.equals("n"))) {
-            input = scanner.next();
-            input = input.toLowerCase();
+            input = scanner.next().toLowerCase();
         }
-        
+
         loginSwitch(input);
-        
-        
         if (!loggedIn) {
             return;
-        } 
-
-        
-        while (loggedIn) {
-            displayMenu();
-            input = this.scanner.next();
-            menuSwitch(input);
         }
 
+        menuLoop();
         System.out.println("Good bye " + this.user.getUsername());
         printDivider();
     }
 
+    // EFFECTS: go through main user menu while logged in
+    private void menuLoop() {
+        while (loggedIn) {
+            displayMenu();
+            String input = this.scanner.next();
+            menuSwitch(input);
+            if (!loggedIn) {
+                break;
+            }
+            System.out.println("Would you like to continue? (Y/N)");
+            input = scanner.next().toLowerCase();
+            if (input.equals("n")) {
+                logout();
+            } else {
+                continue;
+            }
+        }
+    }
+
     private void menuSwitch(String input) {
         input = input.toLowerCase();
+        printDivider();
         switch (input) {
             case "q":
                 logout();
@@ -59,21 +61,12 @@ public class PasswordVault {
                 viewAccounts();
                 break;
             case "p":
-                createNew();
+                printAccountsWithPassword();
+                printPasswords();
                 break;
             case "w":
                 printWebsites();
                 break;
-            case "m":
-                displayMenu();
-                break;
-        }
-        System.out.println("Would you like to continue? (Y/N)");
-        input = scanner.next().toLowerCase();
-        if (input.equals("n")) {
-            logout();
-        } else {
-            return;
         }
     }
 
@@ -84,17 +77,17 @@ public class PasswordVault {
 
     public void viewAccounts() {
         System.out.println("You have " + user.totalAccounts() + " accounts");
-        System.out.println("Here are all your accounts!");
-        printAccounts();
-        System.out.println("Would you like to modify any? (Y/N)");
-        String input = scanner.next().toLowerCase();
-        if (input.equals("y")) {
-            modifyAccounts();
-        } else if (input.equals("n")) {
-            return;
+        if (user.totalAccounts() > 0) {
+            System.out.println("Here are all your accounts!");
+            printAccounts();
+            System.out.println("Would you like to modify any? (Y/N)");
+            String input = scanner.next().toLowerCase();
+            if (input.equals("y")) {
+                modifyAccounts();
+            } else if (input.equals("n")) {
+                return;
+            }
         }
-
-
     }
 
     public void modifyAccounts() {
@@ -113,24 +106,129 @@ public class PasswordVault {
                 removeAccountFromUser();
                 return;
             case "u":
-                addNewAccount();
+                updateAccountInformationDialogue();
                 break;
             case "q":
                 return;
+        }
     }
 
-
-    private void removeAccountFromUser() {
+    public void updateAccountInformationDialogue() {
+        System.out.println("Which account would you like to modify?");
+        Account account = findAccount();
+        updateAccountInformation(account);
+        System.out.println("Would you like to modify another account?");
         String input;
-        System.out.println("Please enter account name: ");
         input = scanner.next().toLowerCase();
-        if (user.getListOfAccounts().contains(input)) {
+        if (input.equals("y")) {
+            printAccounts();
+            updateAccountInformationDialogue();
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates account informaiton
+    public void updateAccountInformation(Account account) {
+        String input;
+        System.out.println("Update username? (Y/N)");
+        input = scanner.next().toLowerCase();
+        if (input.equals("y")) {
+            updateUsername(account);
+        }
+        System.out.println("Update password? (Y/N)");
+        input = scanner.next().toLowerCase();
+        if (input.equals("y")) {
+            updatePassword(account);
+        }
+
+        System.out.println("Update website? (Y/N)");
+        input = scanner.next().toLowerCase();
+        if (input.equals("y")) {
+            updateWebsite(account);
+        } 
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates account username
+    private void updateUsername(Account account) {
+        String input;
+        System.out.println("Enter new username: ");
+        input = scanner.next();
+        if (input.length() > 0) {
+            account.setUsername(input);
+            System.out.println("Username set to " + input);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates account website
+    private void updateWebsite(Account account) {
+        String url;
+        String name;
+        System.out.println("Enter new URL: ");
+        url = scanner.next();
+        if (url.length() > 0) {
+            System.out.println("Enter new Website Name: ");
+            name = scanner.next();
+
+            Website web = new Website(name, url);
+            account.setWebsite(web);
+            System.out.println("Website set to URL " + url + " and name " + name);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates account password
+    private void updatePassword(Account account) {
+        String input;
+        System.out.println("Would you like us to randomize a password? (Y/N) ");
+        input = scanner.next().toLowerCase();
+        if (input.equals("y")) {
+            String pass = generateRandomPassword();
+            account.setPassword(pass);
+            System.out.println("Password set to randomized password " + pass);
+        } else {
+            System.out.println("Enter new password: ");
+            input = scanner.next();
+            if (input.length() > 0) {
+                account.setPassword(input);
+                System.out.println("Password set to " + input);
+            }
+        }
+    }
+
+    // EFFECTS: finds an account from user profile based on account name and website name
+    public Account findAccount() {
+        String username;
+        String website;
+        System.out.println("Please enter account name (case-sensitive): ");
+        username = scanner.next();
+        System.out.println("Please enter website name (case-sensitive): ");
+        website = scanner.next();
+        Account account;
+        account = user.findAccountWebsiteAccountName(username, website);
+        return account;
+    }
+
+    // REQUIRES: account to be in listOfAccounts
+    // MODIFIES: this
+    // EFFECTS: remove account from user profile
+    private void removeAccountFromUser() {
+        Account accountToRemove;
+        accountToRemove = findAccount();
+        user.removeAccount(accountToRemove);
+        System.out.println("Would you like to remove another account? (Y/N)");
+        String input;
+        input = scanner.next().toLowerCase();
+        if (input.equals("Y")) {
+            removeAccountFromUser();
+        }
     }
 
     public void printAccounts() {
         for (Account acc : user.getListOfAccounts()) {
             System.out.println("Account name: " + acc.getUsername() 
-                             + "for website: " + acc.getWebsite().getName());
+                             + " for website: " + acc.getWebsite().getName());
         }
     }
 
@@ -138,10 +236,17 @@ public class PasswordVault {
         for (Account acc : user.getListOfAccounts()) {
             System.out.println("Account name: " 
                         + acc.getUsername() 
-                        + "for website: " 
+                        + " for website: " 
                         + acc.getWebsite().getName() 
-                        + "with password: "
+                        + " with password: "
                          + acc.getPassword().getPassword());
+        }
+    }
+
+    public void printPasswords() {
+        System.out.println("You have " + user.listAllPasswords().size() + " distinct passwords");
+        for (String pass : user.listAllPasswords()) {
+            System.out.println(pass);
         }
     }
 
@@ -156,14 +261,27 @@ public class PasswordVault {
         }
     }
 
-    // MODIFIES: this
-    // EFFECTS: adds a new account to user profile
-    public void addNewAccount() {
+    // EFFECTS: checks if website already exists, else make new website
+    public Website websiteGenerator(String url, String name) {
+        Website website = null;
+        for (Website web : user.listAllWebsites()) {
+            if (web.getUrl().equals(url)) {
+                website = web;
+            }
+        }
+        if (website == null) {
+            website = new Website(name, url);
+        }
+        return website;
+    }
+
+    // EFFECTS: generates a new account
+    public Account generateNewAccount() {
         System.out.println("Please enter the url of the website: ");
         String url = scanner.next();
         System.out.println("Please enter the name of the website: ");
         String name = scanner.next();
-        Website website = new Website(name, url);
+        Website website = websiteGenerator(url, name);
 
         System.out.println("Please enter the username of the account: ");
         String user = scanner.next();
@@ -178,17 +296,28 @@ public class PasswordVault {
             pass = scanner.next();
         }
         Account account = new Account(website, user, pass);
+        return account;
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds a new account to user profile
+    public void addNewAccount() {
+        Account account = generateNewAccount();
         System.out.println("New account created for " 
-                    + website.getName() + " with username " + user + " and password " + pass);
+                    + account.getWebsite().getName() 
+                    + " with username " 
+                    + account.getUsername() 
+                    + " and password " 
+                    + account.getPassword().getPassword());
         this.user.addAccount(account);
         System.out.println("Would you like to add another account (Y/N)?");
-        input = scanner.next().toLowerCase();
+        String input = scanner.next().toLowerCase();
         if (input.equals("y")) {
             addNewAccount();
         } 
     }
 
-    // generate a random string 
+    // EFFECTS: generate a random string for passwords 
     public String generateRandomPassword() {
         String availableChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" 
                                 + "1234567890!@#$%^&*";
@@ -224,7 +353,6 @@ public class PasswordVault {
         System.out.println("Enter 'P' to view passwords");
         System.out.println("Enter 'W' to view websites");
         System.out.println("Enter 'U' to view usernames");
-        System.out.println("Enter 'M' to display menu again");
         System.out.println("Enter 'Q' to quit and logout");
     }
 
@@ -255,9 +383,14 @@ public class PasswordVault {
     }
 
     // MODIFIES: this
-    // EFFECTS: initialize scanner
+    // EFFECTS: initialize scanner and prints initial statements
     public void init() {
+        System.out.println("Welcome to benkey, a super cool password vault");
+        printDivider();
         this.scanner = new Scanner(System.in);
+        System.out.println("Would you like to login or make a new user profile?");
+        printDivider();
+        displayLoginMenu();
     }
 
     // since no persistence, just test account for now
@@ -274,8 +407,9 @@ public class PasswordVault {
                 this.loggedIn = true;
             } else if (input.equals("q")) {
                 return;
+            } else {
+                System.out.println("Hmm... username not found. Please try again!");
             }
-            System.out.println("Hmm... username not found. Please try again!");
         }
         welcomeUser();
     }
@@ -297,21 +431,5 @@ public class PasswordVault {
     // EFFECTS: prints out a divider 
     public void printDivider() {
         System.out.println("--__--__--__--__--__--__--__--__--__--__--__--__--");
-    }
-
-    public boolean isLoggedIn() {
-        return false;
-    }
-
-    public List<Website> getWebsites() {
-        return new ArrayList<Website>();
-    }
-
-    public List<Account> getAccountNames() {
-        return new ArrayList<Account>();
-    }
-
-    public Map<Account, Password> getAccountPasswords() {
-        return new HashMap<>();
     }
 }
