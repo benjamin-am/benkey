@@ -1,6 +1,6 @@
 package model;
 
-// An can only have one account-website combo to store passwords. 
+// An account contains a website, a username and a password
 public class Account {
     // fields
     private Website website;
