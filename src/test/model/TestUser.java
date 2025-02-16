@@ -2,6 +2,7 @@ package model;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -40,6 +41,39 @@ public class TestUser {
     void testConstructor() {
         assertEquals("ben", u1.getUsername());
         assertEquals("test", u1.getPassword().getPassword());
+    }
+
+    @Test 
+    void testSetUsername() {
+        assertEquals("ben", u1.getUsername());
+        u1.setUsername("not ben");
+        assertEquals("not ben", u1.getUsername());
+    }
+
+    @Test 
+    void testSetPassword() {
+        assertEquals("test", u1.getPassword().getPassword());
+        u1.setPassword("not been");
+        assertEquals("not been", u1.getPassword().getPassword());
+    }
+
+    @Test 
+    void testSetAccountList() {
+        assertEquals(0, u1.getListOfAccounts().size());
+        u1.addAccount(a1);
+        assertEquals(1, u1.getListOfAccounts().size());
+        assertEquals(a1, u1.getListOfAccounts().get(0));
+        List<Account> accounts = new ArrayList<>();
+        accounts.add(a2);
+        accounts.add(a3);
+        accounts.add(a4);
+        accounts.add(a5);
+        u1.setAccountList(accounts);
+        assertEquals(4, u1.getListOfAccounts().size());
+        assertEquals(a2, u1.getListOfAccounts().get(0));
+        assertEquals(a3, u1.getListOfAccounts().get(1));
+        assertEquals(a4, u1.getListOfAccounts().get(2));
+        assertEquals(a5, u1.getListOfAccounts().get(3));
     }
 
     
