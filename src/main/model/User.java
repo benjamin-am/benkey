@@ -46,6 +46,7 @@ public class User {
         this.accounts = accounts;
     }
     /* 
+    REQUIRES: can only add unique account names!
     MODIFIES: this
     EFFECTS: adds account to the user's profile
     */
@@ -104,6 +105,13 @@ public class User {
 
     /* 
     EFFECTS: returns list of distinct usernames user in accounts
+    */
+    public List<String> listAllUsernames() {
+        return accounts.stream().map(a -> a.getUsername()).distinct().collect(Collectors.toList()); //stub
+    }
+
+    /* 
+    EFFECTS: returns list of account names
     */
     public List<String> listAllUsernames() {
         return accounts.stream().map(a -> a.getUsername()).distinct().collect(Collectors.toList()); //stub
