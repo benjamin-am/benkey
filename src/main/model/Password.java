@@ -1,7 +1,9 @@
 package model;
 
+// A password, stores an encrypted password
 public class Password {
     private String encryptedPassword;
+
     /* 
     REQUIRES: password length is greater than 0, encrypted password > 0;
     EFFECTS: sets up a new password and encrypted password
