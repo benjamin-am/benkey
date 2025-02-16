@@ -62,6 +62,7 @@ public class PasswordVault {
                 createNew();
                 break;
             case "w":
+                printWebsites();
                 break;
             case "m":
                 displayMenu();
@@ -85,28 +86,73 @@ public class PasswordVault {
         System.out.println("You have " + user.totalAccounts() + " accounts");
         System.out.println("Here are all your accounts!");
         printAccounts();
+        System.out.println("Would you like to modify any? (Y/N)");
+        String input = scanner.next().toLowerCase();
+        if (input.equals("y")) {
+            modifyAccounts();
+        } else if (input.equals("n")) {
+            return;
+        }
 
+
+    }
+
+    public void modifyAccounts() {
+        System.out.println("Please select an option");
+        System.out.println("Enter 'R' to remove account");
+        System.out.println("Enter 'U' to update account website, username, or password");
+        System.out.println("Enter 'Q' to quit and logout");
+        String input;
+        input = scanner.next().toLowerCase();
+        processModifyAccountInput(input);
+    }
+
+    public void processModifyAccountInput(String input) {
+        switch (input) {
+            case "r":
+                removeAccountFromUser();
+                return;
+            case "u":
+                addNewAccount();
+                break;
+            case "q":
+                return;
+    }
+
+
+    private void removeAccountFromUser() {
+        String input;
+        System.out.println("Please enter account name: ");
+        input = scanner.next().toLowerCase();
+        if (user.getListOfAccounts().contains(input)) {
     }
 
     public void printAccounts() {
         for (Account acc : user.getListOfAccounts()) {
-            System.out.println("Account name: " + acc.getUsername() +
-                        "for website: " + acc.getWebsite().getName());
+            System.out.println("Account name: " + acc.getUsername() 
+                             + "for website: " + acc.getWebsite().getName());
         }
     }
 
     public void printAccountsWithPassword() {
         for (Account acc : user.getListOfAccounts()) {
-            System.out.println("Account name: " + acc.getUsername() +
-                        "for website: " + acc.getWebsite().getName() + 
-                        "with password: " + acc.getPassword().getPassword());
+            System.out.println("Account name: " 
+                        + acc.getUsername() 
+                        + "for website: " 
+                        + acc.getWebsite().getName() 
+                        + "with password: "
+                         + acc.getPassword().getPassword());
         }
     }
 
     public void printWebsites() {
         for (Website web : user.listAllWebsites()) {
-            System.out.println("Website name: " + web.getName() +
-                        "with URL: " + acc.getWebsite().getName());
+            System.out.println("Website name: " 
+                        + web.getName() 
+                        + " with URL: " 
+                        + web.getUrl()
+                        + " with " + user.numberOfAccountsOnWebsite(web)
+                        + " account(s)!");
         }
     }
 
@@ -142,9 +188,10 @@ public class PasswordVault {
         } 
     }
 
+    // generate a random string 
     public String generateRandomPassword() {
-        String availableChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" +
-                                "1234567890!@#$%^&*";
+        String availableChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" 
+                                + "1234567890!@#$%^&*";
         Random rand = new Random();
         String generated = "";
         for (int i = 0; i < 20; i++) {
@@ -154,7 +201,7 @@ public class PasswordVault {
         return generated;
     }
 
-
+    // EFFECTS: login controls
     private void loginSwitch(String input) {
         switch (input) {
             case "q":
