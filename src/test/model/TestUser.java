@@ -17,6 +17,7 @@ public class TestUser {
     private Account a2;
     private Account a3;
     private Account a4;
+    private Account a5;
     private Website w1;
     private Website w2;
     private User u1;
@@ -31,6 +32,7 @@ public class TestUser {
         a2 = new Account(w1, "c", "d");
         a3 = new Account(w1, "f", "g");
         a4 = new Account(w1, "f", "ga2");
+        a5 = new Account(w2, "fa", "ga2");
         u1 = new User("ben", "test");
     }
 
@@ -159,6 +161,37 @@ public class TestUser {
         u1.addAccount(a4);
         assertEquals(3, u1.numberOfAccountsOnWebsite(w1));
         assertEquals(1, u1.numberOfAccountsOnWebsite(w2));
+    }
+
+    @Test
+    void testFindAccountWebsiteAccountName() {
+        u1.addAccount(a1);
+        u1.addAccount(a2);
+        u1.addAccount(a3);
+        Account test = u1.findAccountWebsiteAccountName("a", "test1");
+        assertEquals(a1, test);
+        test = u1.findAccountWebsiteAccountName("no", "fail");
+        assertNull(test);
+    }
+
+    @Test
+    void testListAllPasswords() {
+        List<String> test = u1.listAllPasswords();
+        assertEquals(0, test.size());
+        assertTrue(test.isEmpty());
+        u1.addAccount(a1);
+        u1.addAccount(a2);
+        u1.addAccount(a3);
+        u1.addAccount(a4);
+        test = u1.listAllPasswords();
+        assertEquals(4, test.size());
+        u1.addAccount(a5);
+        test = u1.listAllPasswords();
+        assertEquals(4, test.size());
+        assertEquals(a1.getPassword().getPassword(), test.get(0));
+        assertEquals(a2.getPassword().getPassword(), test.get(1));
+        assertEquals(a3.getPassword().getPassword(), test.get(2));
+        assertEquals(a5.getPassword().getPassword(), test.get(3));
     }
 
 }

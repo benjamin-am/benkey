@@ -46,7 +46,7 @@ public class User {
         this.accounts = accounts;
     }
     /* 
-    REQUIRES: can only add unique account names!
+    REQUIRES: can only add unique account name/website name pairs
     MODIFIES: this
     EFFECTS: adds account to the user's profile
     */
@@ -101,13 +101,25 @@ public class User {
         return count;
     }
 
+    // EFFECTS: finds an account based on website and account name
+    public Account findAccountWebsiteAccountName(String username, String website) {
+        Account accountFound = null;
+        for (Account acc : accounts) {
+            if (username.equals(acc.getUsername()) && website.equals(acc.getWebsite().getName())) {
+                accountFound = acc;
+                break;
+            }
+        }
 
+        return accountFound;
+
+    }
 
     /* 
-    EFFECTS: returns list of distinct usernames user in accounts
+    EFFECTS: returns list of distinct passwords in accounts
     */
-    public List<String> listAllUsernames() {
-        return accounts.stream().map(a -> a.getUsername()).distinct().collect(Collectors.toList()); //stub
+    public List<String> listAllPasswords() {
+        return accounts.stream().map(a -> a.getPassword().getPassword()).distinct().collect(Collectors.toList()); //stub
     }
 
     /* 
