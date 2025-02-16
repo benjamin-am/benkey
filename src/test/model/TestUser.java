@@ -228,6 +228,12 @@ public class TestUser {
         assertEquals(a1, test);
         test = u1.findAccountWebsiteAccountName("no", "fail");
         assertNull(test);
+
+        test = u1.findAccountWebsiteAccountName("a", "fail");
+        assertNull(test);
+
+        test = u1.findAccountWebsiteAccountName("no", "test1");
+        assertNull(test);
     }
 
     @Test
