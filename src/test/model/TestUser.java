@@ -154,11 +154,11 @@ public class TestUser {
         assertEquals(1, u1.numberOfAccountsOnWebsite(w1));
         assertEquals(1, u1.numberOfAccountsOnWebsite(w2));
         u1.addAccount(a3);
-        assertEquals(1, u1.numberOfAccountsOnWebsite(w1));
-        assertEquals(2, u1.numberOfAccountsOnWebsite(w2));
+        assertEquals(2, u1.numberOfAccountsOnWebsite(w1));
+        assertEquals(1, u1.numberOfAccountsOnWebsite(w2));
         u1.addAccount(a4);
-        assertEquals(1, u1.numberOfAccountsOnWebsite(w1));
-        assertEquals(3, u1.numberOfAccountsOnWebsite(w2));
+        assertEquals(3, u1.numberOfAccountsOnWebsite(w1));
+        assertEquals(1, u1.numberOfAccountsOnWebsite(w2));
     }
 
 }
