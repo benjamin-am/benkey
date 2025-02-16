@@ -15,8 +15,13 @@ I constantly reset my passwords, and I use Google's password manager. I want som
 
 
 ## User Stories
-- As a user, I want to be able to create a new Password and add it to a Password Vault
+### I called it a password vault here, but you add Accounts to a User, as a user profile is what stores all the user information.
+- As a user, I want to be able to create a new Account and add it to a Password Vault
 - As a user, I want to be able to select a Password Vault and add a new Password to it
+- As a user I want to add multiple accounts to my Password Vault
+- As a user I want to list all accounts in my Password Vault
+- As a user I want to list all my passwords in my Password Vault
+- As a user I want to list all my websites in my Password Vault
 - As a user, I want to be able to select a Password Vault, select a website, and see all my account information for it.
 - As a user, I want to be able to select a website in my Password Vault, update my usernames, passwords, and user statistics for it all in one go.
 - As a user, I want to be able to generate a random password for a specific website and update the password for that website in the software, so I can swiftly update my accounts.
