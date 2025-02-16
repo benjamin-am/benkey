@@ -76,6 +76,28 @@ public class TestUser {
         assertEquals(a5, u1.getListOfAccounts().get(3));
     }
 
+    @Test
+    void testFindAccountsOnWebsite() {
+        u1.addAccount(a1);
+        u1.addAccount(a2);
+        u1.addAccount(a3);
+        u1.addAccount(a4);
+        u1.addAccount(a5);
+        Website fake = new Website("AHH", "DOESNT MATTER");
+        List<Account> test = u1.findAccountsOnWebsite(fake);
+        assertEquals(0, test.size());
+        assertTrue(test.isEmpty());
+        test = u1.findAccountsOnWebsite(w1);
+        assertEquals(3, test.size());
+        assertEquals(a2, test.get(0));
+        assertEquals(a3, test.get(1));
+        assertEquals(a4, test.get(2));
+
+        test = u1.findAccountsOnWebsite(w2);
+        assertEquals(2, test.size());
+        assertEquals(a1, test.get(0));
+        assertEquals(a5, test.get(1));
+    }
     
     @Test
     void testGetListOfAccountsAndAddAccount() {

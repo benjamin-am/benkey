@@ -115,6 +115,17 @@ public class User {
 
     }
 
+    // EFFECTS: returns list of accounts on a specific website
+    public List<Account> findAccountsOnWebsite(Website website) {
+        List<Account> accountsFound = new ArrayList<>();
+        for (Account acc : accounts) {
+            if (acc.getWebsite().equals(website)) {
+                accountsFound.add(acc);
+            }
+        }
+        return accountsFound;
+    }
+
     /* 
     EFFECTS: returns list of distinct passwords in accounts
     */
