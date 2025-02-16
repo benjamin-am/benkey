@@ -1,5 +1,6 @@
 package model;
 
+// A website contains a name and URL. Represents a Website or an app that you can store passwords for.
 public class Website {
     // fields
     private String name;
