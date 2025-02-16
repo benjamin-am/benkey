@@ -89,6 +89,14 @@ public class User {
         return websites;
     }
 
+    // EFFECTS: Returns count of accounts on a specific website
+    public int numberOfAccountsOnWebsite(Website website) {
+        int count = 0; //stubs
+        return count;
+    }
+
+    
+
     /* 
     EFFECTS: returns list of distinct usernames user in accounts
     */
