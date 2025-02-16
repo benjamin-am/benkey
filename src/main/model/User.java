@@ -33,6 +33,7 @@ public class User {
     public List<Account> getListOfAccounts() {
         return this.accounts; // stub
     }
+
     // setters
     public void setUsername(String username) {
         this.username = username;
@@ -45,6 +46,7 @@ public class User {
     public void setAccountList(List<Account> accounts) {
         this.accounts = accounts;
     }
+
     /* 
     REQUIRES: can only add unique account name/website name pairs
     MODIFIES: this
@@ -73,7 +75,7 @@ public class User {
     EFFECTS: returns number of Websites a user has an account for
     */
     public int totalWebsites() {
-       return listAllWebsites().size();
+        return listAllWebsites().size();
     }
 
     /* 
@@ -110,9 +112,7 @@ public class User {
                 break;
             }
         }
-
         return accountFound;
-
     }
 
     // EFFECTS: returns list of accounts on a specific website
