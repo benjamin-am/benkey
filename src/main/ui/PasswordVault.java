@@ -1,16 +1,20 @@
 package ui; 
 
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 import model.*;
 // Most of PasswordVault is based on TellerApp, PuppyCaller ui code from class
+// Password Vault logs a user in to a Password vault, and allows the user to access and
+// modify their accounts, websites, and passwords through the terminal
 
 public class PasswordVault {
     private Scanner scanner;
     private boolean loggedIn;
     private User user;
     
+    // EFFECTS: launches Password Vault loop for the user to interact with
     public PasswordVault() {
         init();
         String input = "";
@@ -47,6 +51,7 @@ public class PasswordVault {
         }
     }
 
+    // EFFECTS: selects an option from the main menu
     private void menuSwitch(String input) {
         input = input.toLowerCase();
         printDivider();
@@ -65,16 +70,48 @@ public class PasswordVault {
                 printPasswords();
                 break;
             case "w":
-                printWebsites();
+                viewWebsites();
+                break;
+            case "u":
+                printUsernames();
                 break;
         }
     }
 
+    // EFFECTS: prints website information, allows user to see account information for a specific website
+    private void viewWebsites() {
+        printWebsites();
+        System.out.println("Would you like to see account information for a specific website? (Y/N)");
+        String input = scanner.next().toLowerCase();
+        if (input.equals("y")) {
+            getAccountsForWebsite();
+        }
+    }
+
+    // EFFECTS: gets all account information for a specific website, allows user to modify account if wanted
+    private void getAccountsForWebsite() {
+        System.out.println("Please enter website URL (case-sensitive): ");
+        String url = scanner.next();
+        System.out.println("Please enter website name (case-sensitive): ");
+        String name = scanner.next();
+        Website website = websiteGenerator(url, name);
+        List<Account> accounts = user.findAccountsOnWebsite(website);
+        printAccountsWithPassword(accounts);
+        System.out.println("Would you like to modify any accounts? (Y/N)");
+        String input = scanner.next().toLowerCase();
+        if (input.equals("y")) {
+            modifyAccounts();
+        }
+    }
+
+    // EFFECTS: logout and end PasswordVault session
     private void logout() {
         loggedIn = false;
         System.out.println("logging out...");
     }
 
+    // EFFECTS: view all user accounts. Also initiates modificiation if user wants to 
+    //          modify their accounts.
     public void viewAccounts() {
         System.out.println("You have " + user.totalAccounts() + " accounts");
         if (user.totalAccounts() > 0) {
@@ -90,6 +127,7 @@ public class PasswordVault {
         }
     }
 
+    // EFFECTS: modify accounts menu and menu selection
     public void modifyAccounts() {
         System.out.println("Please select an option");
         System.out.println("Enter 'R' to remove account");
@@ -100,6 +138,7 @@ public class PasswordVault {
         processModifyAccountInput(input);
     }
 
+    // EFFECTS: process modify accounts menu and menu selection
     public void processModifyAccountInput(String input) {
         switch (input) {
             case "r":
@@ -113,6 +152,7 @@ public class PasswordVault {
         }
     }
 
+    // EFFECTS: prints account update information dialogue and selects account to be updated
     public void updateAccountInformationDialogue() {
         System.out.println("Which account would you like to modify?");
         Account account = findAccount();
@@ -171,7 +211,7 @@ public class PasswordVault {
             System.out.println("Enter new Website Name: ");
             name = scanner.next();
 
-            Website web = new Website(name, url);
+            Website web = websiteGenerator(name, url);
             account.setWebsite(web);
             System.out.println("Website set to URL " + url + " and name " + name);
         }
@@ -225,6 +265,7 @@ public class PasswordVault {
         }
     }
 
+    // EFFECTS: prints user's accounts
     public void printAccounts() {
         for (Account acc : user.getListOfAccounts()) {
             System.out.println("Account name: " + acc.getUsername() 
@@ -232,6 +273,26 @@ public class PasswordVault {
         }
     }
 
+    // EFFECTS: prints user's usernames
+    public void printUsernames() {
+        System.out.println("You have " + user.listAllUsernames().size() + " distinct usernames");
+        System.out.println("Here are your usernames");
+        for (String username : user.listAllUsernames()) {
+            System.out.println(username);
+        }
+    }
+
+    // EFFECTS: prints list of accounts with their passwords 
+    public void printAccountsWithPassword(List<Account> accounts) {
+        for (Account acc : accounts) {
+            System.out.println("Account name: " + acc.getUsername() 
+                            + " for website: " + acc.getWebsite().getName()
+                            + " with password: "
+                            + acc.getPassword().getPassword());
+        }
+    }
+
+    // EFFECTS: prints the user's list of accounts with their passwords 
     public void printAccountsWithPassword() {
         for (Account acc : user.getListOfAccounts()) {
             System.out.println("Account name: " 
@@ -239,7 +300,7 @@ public class PasswordVault {
                         + " for website: " 
                         + acc.getWebsite().getName() 
                         + " with password: "
-                         + acc.getPassword().getPassword());
+                        + acc.getPassword().getPassword());
         }
     }
 
@@ -414,6 +475,7 @@ public class PasswordVault {
         welcomeUser();
     }
 
+    // MODIFIES: this
     // EFFECTS: sets up dummy accounts and passwords for test user
     public void initializeTestUser() {
         Website netflix = new Website("netflix", "netflix.com");
