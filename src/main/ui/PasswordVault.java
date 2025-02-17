@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import model.*;
 // Most of PasswordVault is based on TellerApp, PuppyCaller ui code from class
-// Password Vault logs a user in to a Password vault, and allows the user to access and
+// Password Vault allows a user to login to their Password vault, and allows the user to access and
 // modify their accounts, websites, and passwords through the terminal
 
 public class PasswordVault {
@@ -108,10 +108,11 @@ public class PasswordVault {
             modifyAccounts();
         }
     }
-
+    
+    // MODIFIES: this
     // EFFECTS: logout and end PasswordVault session
     private void logout() {
-        loggedIn = false;
+        this.loggedIn = false;
         System.out.println("logging out...");
     }
 
@@ -172,7 +173,7 @@ public class PasswordVault {
         }
     }
 
-    // MODIFIES: this
+
     // EFFECTS: updates account informaiton
     public void updateAccountInformation(Account account) {
         String input;
@@ -194,7 +195,7 @@ public class PasswordVault {
         } 
     }
 
-    // MODIFIES: this
+    // MODIFIES: account
     // EFFECTS: updates account username
     private void updateUsername(Account account) {
         String input;
@@ -206,7 +207,7 @@ public class PasswordVault {
         }
     }
 
-    // MODIFIES: this
+    // MODIFIES: account
     // EFFECTS: updates account website
     private void updateWebsite(Account account) {
         String url;
@@ -223,7 +224,7 @@ public class PasswordVault {
         }
     }
 
-    // MODIFIES: this
+    // MODIFIES: account
     // EFFECTS: updates account password
     private void updatePassword(Account account) {
         String input;
