@@ -134,6 +134,7 @@ public class PasswordVault {
 
     // EFFECTS: modify accounts menu and menu selection
     public void modifyAccounts() {
+        printDivider();
         System.out.println("Please select an option");
         System.out.println("Enter 'R' to remove account");
         System.out.println("Enter 'U' to update account website, username, or password");
@@ -162,7 +163,7 @@ public class PasswordVault {
         System.out.println("Which account would you like to modify?");
         Account account = findAccount();
         updateAccountInformation(account);
-        System.out.println("Would you like to modify another account?");
+        System.out.println("Would you like to modify another account? (Y/N)");
         String input;
         input = scanner.next().toLowerCase();
         if (input.equals("y")) {
