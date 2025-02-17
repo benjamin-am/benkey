@@ -33,7 +33,7 @@ public class PasswordVault {
     }
 
     // EFFECTS: go through main user menu while logged in
-    private void menuLoop() {
+    public void menuLoop() {
         while (loggedIn) {
             displayMenu();
             String input = this.scanner.next();
@@ -53,7 +53,7 @@ public class PasswordVault {
     }
 
     // EFFECTS: selects an option from the main menu
-    private void menuSwitch(String input) {
+    public void menuSwitch(String input) {
         input = input.toLowerCase();
         printDivider();
         switch (input) {
@@ -80,7 +80,7 @@ public class PasswordVault {
     }
 
     // EFFECTS: prints website information, allows user to see account information for a specific website
-    private void viewWebsites() {
+    public void viewWebsites() {
         if (user.totalAccounts() == 0) {
             System.out.println("You have 0 accounts, no websites to display");
             return;
@@ -94,7 +94,7 @@ public class PasswordVault {
     }
 
     // EFFECTS: gets all account information for a specific website, allows user to modify account if wanted
-    private void getAccountsForWebsite() {
+    public void getAccountsForWebsite() {
         System.out.println("Please enter website URL (case-sensitive): ");
         String url = scanner.next();
         System.out.println("Please enter website name (case-sensitive): ");
@@ -111,7 +111,7 @@ public class PasswordVault {
     
     // MODIFIES: this
     // EFFECTS: logout and end PasswordVault session
-    private void logout() {
+    public void logout() {
         this.loggedIn = false;
         System.out.println("logging out...");
     }
@@ -197,7 +197,7 @@ public class PasswordVault {
 
     // MODIFIES: account
     // EFFECTS: updates account username
-    private void updateUsername(Account account) {
+    public void updateUsername(Account account) {
         String input;
         System.out.println("Enter new username: ");
         input = scanner.next();
@@ -209,7 +209,7 @@ public class PasswordVault {
 
     // MODIFIES: account
     // EFFECTS: updates account website
-    private void updateWebsite(Account account) {
+    public void updateWebsite(Account account) {
         String url;
         String name;
         System.out.println("Enter new URL: ");
@@ -226,7 +226,7 @@ public class PasswordVault {
 
     // MODIFIES: account
     // EFFECTS: updates account password
-    private void updatePassword(Account account) {
+    public void updatePassword(Account account) {
         String input;
         System.out.println("Would you like us to randomize a password? (Y/N) ");
         input = scanner.next().toLowerCase();
@@ -260,7 +260,7 @@ public class PasswordVault {
     // REQUIRES: account to be in listOfAccounts
     // MODIFIES: this
     // EFFECTS: remove account from user profile
-    private void removeAccountFromUser() {
+    public void removeAccountFromUser() {
         Account accountToRemove;
         accountToRemove = findAccount();
         this.user.removeAccount(accountToRemove);
@@ -401,7 +401,7 @@ public class PasswordVault {
     }
 
     // EFFECTS: login controls
-    private void loginSwitch(String input) {
+    public void loginSwitch(String input) {
         switch (input) {
             case "q":
                 return;
@@ -415,7 +415,7 @@ public class PasswordVault {
     }
     
     // EFFECTS: print usage menu
-    private void displayMenu() {
+    public void displayMenu() {
         System.out.println("What would you like to do today?");
         printDivider();
         System.out.println("Enter 'A' to add new account");
@@ -427,7 +427,7 @@ public class PasswordVault {
     }
 
     // EFFECTS: print login menu statements
-    private void displayLoginMenu() {
+    public void displayLoginMenu() {
         System.out.println("Enter 'L' to login");
         System.out.println("Enter 'N' to create a new user profile");
         System.out.println("Enter 'Q' to quit");
@@ -448,7 +448,7 @@ public class PasswordVault {
     }
 
     // EFFECTS: prints welcome message
-    private void welcomeUser() {
+    public void welcomeUser() {
         System.out.println("Welcome " + this.user.getUsername());
     }
 
