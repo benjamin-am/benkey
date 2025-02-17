@@ -19,6 +19,7 @@ public class Account {
         this.password = new Password(password);
     }
 
+    // getters
     public Password getPassword() {
         return this.password;
     }
@@ -31,6 +32,7 @@ public class Account {
         return this.username;
     }
 
+    // setters
     public void setPassword(String password) {
         this.password = new Password(password);
     }

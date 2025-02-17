@@ -12,10 +12,13 @@ public class Password {
         this.encryptedPassword = encryptPassword(password);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the encrypted password for the instance
     public void setPassword(String pass) {
         this.encryptedPassword = encryptPassword(pass);
     }
 
+    // EFFECTS: returns a decrypted password
     public String getPassword() {
         return decryptPassword();
     }
