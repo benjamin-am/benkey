@@ -41,6 +41,7 @@ public class PasswordVault {
             if (!loggedIn) {
                 break;
             }
+            printDivider();
             System.out.println("Would you like to continue? (Y/N)");
             input = scanner.next().toLowerCase();
             if (input.equals("n")) {
@@ -80,6 +81,10 @@ public class PasswordVault {
 
     // EFFECTS: prints website information, allows user to see account information for a specific website
     private void viewWebsites() {
+        if (user.totalAccounts() == 0) {
+            System.out.println("You have 0 accounts, no websites to display");
+            return;
+        }
         printWebsites();
         System.out.println("Would you like to see account information for a specific website? (Y/N)");
         String input = scanner.next().toLowerCase();
@@ -256,7 +261,7 @@ public class PasswordVault {
     private void removeAccountFromUser() {
         Account accountToRemove;
         accountToRemove = findAccount();
-        user.removeAccount(accountToRemove);
+        this.user.removeAccount(accountToRemove);
         System.out.println("Would you like to remove another account? (Y/N)");
         String input;
         input = scanner.next().toLowerCase();
@@ -304,6 +309,7 @@ public class PasswordVault {
         }
     }
 
+    // EFFECTS: prints a user's passwords and count of distinct passwords
     public void printPasswords() {
         System.out.println("You have " + user.listAllPasswords().size() + " distinct passwords");
         for (String pass : user.listAllPasswords()) {
@@ -311,6 +317,7 @@ public class PasswordVault {
         }
     }
 
+    // EFFECTS: prints a user's websites tied to their accounts and count of accounts on website
     public void printWebsites() {
         for (Website web : user.listAllWebsites()) {
             System.out.println("Website name: " 
@@ -322,7 +329,7 @@ public class PasswordVault {
         }
     }
 
-    // EFFECTS: checks if website already exists, else make new website
+    // EFFECTS: if website exists, return it, else make a new one and return it
     public Website websiteGenerator(String url, String name) {
         Website website = null;
         for (Website web : user.listAllWebsites()) {
@@ -434,7 +441,7 @@ public class PasswordVault {
         System.out.println("Please enter your password");
         String pass = scanner.next();
         this.user = new User(user, pass);
-        loggedIn = true;
+        this.loggedIn = true;
         welcomeUser();
     }
 
@@ -456,6 +463,7 @@ public class PasswordVault {
 
     // since no persistence, just test account for now
     // REQUIRES: never run if loggedIn is true
+    // MODIFIES: this
     // EFFECTS: attempts to login
     public void login() {
         printDivider();
