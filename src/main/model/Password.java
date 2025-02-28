@@ -1,7 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // A password, stores an encrypted password
-public class Password {
+public class Password implements Writable {
     private String encryptedPassword;
 
     /* 
@@ -40,6 +44,15 @@ public class Password {
     private String decryptPassword() {
         int size = encryptedPassword.length();
         return encryptedPassword.substring(0, size - 2);
+    }
+
+    // taken from JSONSERIALIZATIONDEMO
+    //EFFECTS: turns object into JSON
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("password", encryptedPassword);
+        return json;
     }
 
 }

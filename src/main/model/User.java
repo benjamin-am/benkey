@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // A user of the password vault. Has a login (username/password) and has a list of accounts
 // A user can only have one account-website combo to store passwords. 
-public class User {
+public class User implements Writable {
     private String username;
     private Password password;
     private List<Account> accounts;
@@ -146,6 +151,29 @@ public class User {
     */
     public boolean verifyPassword(String pass) {
         return password.getPassword().equals(pass);
+    }
+
+    // taken from JSONSERIALIZATIONDEMO
+    //EFFECTS: turns object into JSON
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("user", username);
+        json.put("password", password.toJson());
+        json.put("accounts", accountsToJson());
+        return json;
+    }
+
+    // taken from JSONSERIALIZATIONDEMO
+    //EFFECTS: turns list of accounts into JSON
+    public JSONArray accountsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Account a : accounts) {
+            jsonArray.put(a.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

@@ -1,7 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // A website contains a name and URL. Represents a Website or an app that you can store passwords for.
-public class Website {
+public class Website implements Writable {
     // fields
     private String name;
     private String url;
@@ -31,5 +35,15 @@ public class Website {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    // taken from JSONSERIALIZATIONDEMO
+    //EFFECTS: turns object into JSON
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("nameWebsite", name);
+        json.put("url", url);
+        return json;
     }
 }

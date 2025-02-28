@@ -1,7 +1,11 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistence.Writable;
+
 // An account contains a website, a username and a password
-public class Account {
+public class Account implements Writable {
     // fields
     private Website website;
     private String username;
@@ -43,6 +47,17 @@ public class Account {
 
     public void setWebsite(Website website) {
         this.website = website;
+    }
+
+    // taken from JSONSERIALIZATIONDEMO
+    //EFFECTS: turns object into JSON
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("website", website.toJson());
+        json.put("username", username);
+        json.put("password", password.toJson());
+        return json;
     }
 
 }
