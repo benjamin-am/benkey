@@ -16,6 +16,13 @@ public class Password implements Writable {
         this.encryptedPassword = encryptPassword(password);
     }
 
+    /* 
+    EFFECTS: sets up a blank encrypted password, to be set later
+    */
+    public Password() {
+        this.encryptedPassword = "";
+    }
+
     // MODIFIES: this
     // EFFECTS: sets the encrypted password for the instance by encrypting the string
     public void setPassword(String pass) {
