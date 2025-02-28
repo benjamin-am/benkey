@@ -17,9 +17,15 @@ public class Password implements Writable {
     }
 
     // MODIFIES: this
-    // EFFECTS: sets the encrypted password for the instance
+    // EFFECTS: sets the encrypted password for the instance by encrypting the string
     public void setPassword(String pass) {
         this.encryptedPassword = encryptPassword(pass);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets the encrypted password for the instance
+    public void setEncryptedPassword(String pass) {
+        this.encryptedPassword = pass;
     }
 
     // EFFECTS: returns a decrypted password
