@@ -27,6 +27,17 @@ public class User implements Writable {
         this.accounts = new ArrayList<>();
     }
 
+ /* 
+    REQUIRES: a user's username and password must be stringlength > 0
+    EFFECTS: Sets up a user profile for the password vault. Creates a blank
+            profile with an empty list. The user MUST remember their password.
+    */
+    public User(String username, Password password) {
+        this.username = username;
+        this.password = password;
+        this.accounts = new ArrayList<>();
+    }
+
     // getters
     public String getUsername() {
         return this.username; // stub
