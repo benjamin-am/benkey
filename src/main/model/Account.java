@@ -23,6 +23,18 @@ public class Account implements Writable {
         this.password = new Password(password);
     }
 
+    /* 
+    REQUIRES: website, username, password are all length > 1.
+             website string is everything between www. and .com.
+    EFFECTS: sets up a new Account. Website is name of the website for the account;
+            userName is username for that website; password is password for that website;
+    */
+    public Account(Website website, String username, Password password) {
+        this.website = website;
+        this.username = username;
+        this.password = password;
+    }
+
     // getters
     public Password getPassword() {
         return this.password;
