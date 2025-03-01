@@ -1,0 +1,30 @@
+{
+    "password": {"password": "BadPass2C1"},
+    "accounts": [
+        {
+            "website": {
+                "nameWebsite": "test1",
+                "url": "test.com1"
+            },
+            "password": {"password": "aC1"},
+            "username": "a"
+        },
+        {
+            "website": {
+                "nameWebsite": "test",
+                "url": "test.com"
+            },
+            "password": {"password": "dC1"},
+            "username": "c"
+        },
+        {
+            "website": {
+                "nameWebsite": "test",
+                "url": "test.com"
+            },
+            "password": {"password": "gC1"},
+            "username": "f"
+        }
+    ],
+    "user": "Erica"
+}
