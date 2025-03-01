@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 
 import org.json.JSONObject;
 
+import model.User;
+
 // Most of this class is based off of the JsonReader example from JsonSerializationDemo
 // Represents a writer that writes JSON representation of workroom to file
 public class JsonWriter {
@@ -28,8 +30,8 @@ public class JsonWriter {
      // MODIFIES: this
     // EFFECTS: writes JSON representation of user to file
     public void write(User user) {
-        // JSONObject json = user.toJson();
-        // saveToFile(json.toString(TAB));
+        JSONObject json = user.toJson();
+        saveToFile(json.toString(TAB));
     }
 
     // MODIFIES: this
@@ -41,6 +43,6 @@ public class JsonWriter {
     // MODIFIES: this
     // EFFECTS: writes string to file
     private void saveToFile(String json) {
-        // writer.print(json);
+        writer.print(json);
     }
 }

@@ -9,9 +9,10 @@ import java.util.stream.Stream;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import model.User;
+import model.*;
 
-// Most of this class is based off of the JsonReader example 
+// Most of this class is based off of the JsonReader example JsonSerializationDemo
+// Represents a reader that reads workroom from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -42,29 +43,42 @@ public class JsonReader {
 
     // EFFECTS: parses user from JSON object and returns it
     private User parseUser(JSONObject jsonObject) {
-        // String name = jsonObject.getString("name");
+        String username = jsonObject.getString("user");
 
-        // User wr = new User(name);
-        // addThingies(wr, jsonObject);
-        return null;
+        JSONObject passwordObject = jsonObject.getJSONObject("password");
+        String password = passwordObject.getString("password");
+        Password pass = new Password();
+        pass.setEncryptedPassword(password);
+
+        User user = new User(username, pass);
+        addAccounts(user, jsonObject);
+        return user;
     }
 
     // MODIFIES: user
     // EFFECTS: parses accounts from JSON object and adds them to user
     private void addAccounts(User user, JSONObject jsonObject) {
-        // JSONArray jsonArray = jsonObject.getJSONArray("thingies");
-        // for (Object json : jsonArray) {
-        //     JSONObject nextThingy = (JSONObject) json;
-        //     addThingy(wr, nextThingy);
-        // }
+        JSONArray jsonArray = jsonObject.getJSONArray("accounts");
+        for (Object json : jsonArray) {
+            JSONObject nextAccount = (JSONObject) json;
+            addAccount(user, nextAccount);
+        }
     }
 
     // MODIFIES: user
     // EFFECTS: parses account from JSON object and adds it to user
-    private void addThingy(User user, JSONObject jsonObject) {
-        // String name = jsonObject.getString("name");
-        // Category category = Category.valueOf(jsonObject.getString("category"));
-        // Thingy thingy = new Thingy(name, category);
-        // wr.addThingy(thingy);
+    private void addAccount(User user, JSONObject jsonObject) {
+        String username = jsonObject.getString("username");
+        JSONObject websiteObject = jsonObject.getJSONObject("website");
+        String website = websiteObject.getString("nameWebsite");
+        String url = websiteObject.getString("url");
+        Website site = new Website(website, url);
+
+        JSONObject passwordObject = jsonObject.getJSONObject("password");
+        String password = passwordObject.getString("password");
+        Password pass = new Password();
+        pass.setEncryptedPassword(password);
+        Account account = new Account(site, username, pass);
+        user.addAccount(account);
     }
 }
