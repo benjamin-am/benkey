@@ -29,5 +29,5 @@ I constantly reset my passwords, and I use Google's password manager. I want som
 - As a user, I want to be able to login to the Password Vault with one password, so I only have to remember one password
 - As a user, I want to be able to see a dashboard of how many websites I have passwords for, how often I access certain websites passwords, and statistics about sites I never seem to access so I know when to delete accounts
 - As a user, I want seamless integration with my browser and my Password Vault, so I have to put in minimal effort when signing in.
-- As a user, I want to be able to save my password vault to file (if I so choose)
-- As a user, I want to be able to be able to load my password vault from file (if I so choose)
+- As a user, I want to be able to save my password vault to file (if I so choose). This is done by the main menu.
+- As a user, I want to be able to be able to load my password vault from file (if I so choose). This is done by logging in!
