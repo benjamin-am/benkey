@@ -1,0 +1,22 @@
+{
+    "password": {"password": "bestPassC1"},
+    "accounts": [
+        {
+            "website": {
+                "nameWebsite": "b",
+                "url": "a"
+            },
+            "password": {"password": "aCQ3fML9tM&HE*#X^QpTC1"},
+            "username": "ben"
+        },
+        {
+            "website": {
+                "nameWebsite": "b",
+                "url": "b"
+            },
+            "password": {"password": "uvFuso87IwlKvZFmmSzIC1"},
+            "username": "ben"
+        }
+    ],
+    "user": "ben"
+}
