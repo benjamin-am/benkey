@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -33,4 +34,12 @@ public class Saving {
             saveAccount(user, scanner);
         }        
     }
+
+    // Attribution: https://stackoverflow.com/questions/1816673/how-do-i-check-if-a-file-exists-in-java
+    // wanted to find a way to see if a file exists, so I don't have multiple usernames for User
+    // EFFECTS: checks if user profile already exists
+    public static boolean checkUserExists(String user) {
+        return new File(path + user + ext).isFile();
+    }
+    
 }
