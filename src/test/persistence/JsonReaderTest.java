@@ -2,30 +2,14 @@ package persistence;
 
 import model.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 // Majority of these tests were derived from JsonSerializationDemo
 public class JsonReaderTest {
-    private Account a1;
-    private Account a2;
-    private Account a3;
-    private Website w1;
-    private Website w2;
-
-    @BeforeEach
-    void runBefore() {
-        w1 = new Website("test", "test.com");
-        w2 = new Website("test1", "test.com1");
-        a1 = new Account(w2, "a", "a");
-        a2 = new Account(w1, "c", "d");
-        a3 = new Account(w1, "f", "g");
-    }
 
     @Test
     void testReaderNonExistentFile() {
@@ -33,6 +17,7 @@ public class JsonReaderTest {
         try {
             User user = reader.read();
             fail("IOException expected");
+            user.getUsername();
         } catch (IOException e) {
             // pass
         }
