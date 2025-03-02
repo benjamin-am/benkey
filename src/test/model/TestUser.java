@@ -43,6 +43,32 @@ public class TestUser {
         assertEquals("test", u1.getPassword().getPassword());
     }
 
+    @Test
+    void testWebsiteGen() {
+        u1.addAccount(a1);
+        u1.addAccount(a2);
+        u1.addAccount(a3);
+        u1.addAccount(a4);
+        u1.addAccount(a5);
+
+        Website test = u1.websiteGenerator("test.com", "test");
+        assertTrue(w1.equals(test));
+        test = u1.websiteGenerator("doesntexxist", "ahhh");
+        assertFalse(w1.equals(test));
+        assertFalse(w2.equals(test));
+        assertEquals("ahhh", test.getName());
+        assertEquals("doesntexxist", test.getUrl());
+    }
+
+    @Test
+    void testgenerateRandomPassword() {
+        String pass = User.generateRandomPassword();
+        String availableChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" 
+                                + "1234567890!@#$%^&*";
+        assertEquals(20, pass.length());
+        assertFalse(pass.isEmpty());
+    }
+
     @Test 
     void testSetUsername() {
         assertEquals("ben", u1.getUsername());

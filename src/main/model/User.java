@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.json.JSONArray;
@@ -185,6 +186,33 @@ public class User implements Writable {
         }
 
         return jsonArray;
+    }
+
+    // EFFECTS: if website exists in list of websites, return it, else make a new one and return it
+    public Website websiteGenerator(String url, String name) {
+        Website website = null;
+        for (Website web : listAllWebsites()) {
+            if (web.getUrl().equals(url)) {
+                website = web;
+            }
+        }
+        if (website == null) {
+            website = new Website(name, url);
+        }
+        return website;
+    }
+
+    // EFFECTS: generate a random string for passwords 
+    public static String generateRandomPassword() {
+        String availableChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" 
+                                + "1234567890!@#$%^&*";
+        Random rand = new Random();
+        String generated = "";
+        for (int i = 0; i < 20; i++) {
+            int randInt = rand.nextInt(availableChars.length());
+            generated = generated + availableChars.charAt(randInt);
+        }
+        return generated;
     }
 
 }
