@@ -2,7 +2,6 @@ package ui;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 import model.*;
@@ -97,7 +96,7 @@ public class PasswordVault {
         String url = scanner.next();
         System.out.println("Please enter website name (case-sensitive): ");
         String name = scanner.next();
-        Website website = websiteGenerator(url, name);
+        Website website = user.websiteGenerator(url, name);
         List<Account> accounts = user.findAccountsOnWebsite(website);
         printAccountsWithPassword(accounts);
         System.out.println("Would you like to modify any accounts? (Y/N)");
@@ -111,6 +110,12 @@ public class PasswordVault {
     // EFFECTS: logout and end PasswordVault session
     public void logout() {
         this.loggedIn = false;
+        System.out.println("Would you like to save? (Y/N)");
+        String input = scanner.next();
+        input.toLowerCase();
+        if (input.equals("y")) {
+            Saving.saveAccount(this.user, scanner);
+        }
         System.out.println("logging out...");
     }
 
@@ -216,7 +221,7 @@ public class PasswordVault {
             System.out.println("Enter new Website Name: ");
             name = scanner.next();
 
-            Website web = websiteGenerator(name, url);
+            Website web = user.websiteGenerator(name, url);
             account.setWebsite(web);
             System.out.println("Website set to URL " + url + " and name " + name);
         }
@@ -229,7 +234,7 @@ public class PasswordVault {
         System.out.println("Would you like us to randomize a password? (Y/N) ");
         input = scanner.next().toLowerCase();
         if (input.equals("y")) {
-            String pass = generateRandomPassword();
+            String pass = User.generateRandomPassword();
             account.setPassword(pass);
             System.out.println("Password set to randomized password " + pass);
         } else {
@@ -265,7 +270,7 @@ public class PasswordVault {
         System.out.println("Would you like to remove another account? (Y/N)");
         String input;
         input = scanner.next().toLowerCase();
-        if (input.equals("Y")) {
+        if (input.equals("y")) {
             removeAccountFromUser();
         }
     }
@@ -329,19 +334,6 @@ public class PasswordVault {
         }
     }
 
-    // EFFECTS: if website exists, return it, else make a new one and return it
-    public Website websiteGenerator(String url, String name) {
-        Website website = null;
-        for (Website web : user.listAllWebsites()) {
-            if (web.getUrl().equals(url)) {
-                website = web;
-            }
-        }
-        if (website == null) {
-            website = new Website(name, url);
-        }
-        return website;
-    }
 
     // EFFECTS: generates a new account
     public Account generateNewAccount() {
@@ -349,7 +341,7 @@ public class PasswordVault {
         String url = scanner.next();
         System.out.println("Please enter the name of the website: ");
         String name = scanner.next();
-        Website website = websiteGenerator(url, name);
+        Website website = user.websiteGenerator(url, name);
 
         System.out.println("Please enter the username of the account: ");
         String user = scanner.next();
@@ -357,7 +349,7 @@ public class PasswordVault {
         String input = scanner.next().toLowerCase();
         String pass = "";
         if (input.equals("y")) {
-            pass = generateRandomPassword();
+            pass = User.generateRandomPassword();
             System.out.println("Password is set to " + pass);
         } else {
             System.out.println("Please enter password");
@@ -385,18 +377,6 @@ public class PasswordVault {
         } 
     }
 
-    // EFFECTS: generate a random string for passwords 
-    public String generateRandomPassword() {
-        String availableChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" 
-                                + "1234567890!@#$%^&*";
-        Random rand = new Random();
-        String generated = "";
-        for (int i = 0; i < 20; i++) {
-            int randInt = rand.nextInt(availableChars.length());
-            generated = generated + availableChars.charAt(randInt);
-        }
-        return generated;
-    }
 
     // EFFECTS: login controls
     public void loginSwitch(String input) {
@@ -432,6 +412,7 @@ public class PasswordVault {
         System.out.println("Enter 'Q' to quit");
     }
 
+    // REQUIRES: new user has to be unique
     // MODIFIES: this
     // EFFECTS: creates a new user profile
     public void createNew() {
@@ -474,7 +455,7 @@ public class PasswordVault {
         while (!loggedIn) {
             String input = this.scanner.next();
             if (input.equals("testAccount")) {
-                this.user = new User("ben", "funtest");
+                this.user = new User("benTest", "funtest");
                 initializeTestUser();
                 this.loggedIn = true;
             } else if (input.equals("q")) {
