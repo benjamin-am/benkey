@@ -1,5 +1,6 @@
 package ui; 
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -42,13 +43,6 @@ public class PasswordVault {
                 break;
             }
             printDivider();
-            System.out.println("Would you like to continue? (Y/N)");
-            input = scanner.next().toLowerCase();
-            if (input.equals("n")) {
-                logout();
-            } else {
-                continue;
-            }
         }
     }
 
@@ -76,8 +70,12 @@ public class PasswordVault {
             case "u":
                 printUsernames();
                 break;
+            case "s":
+                Saving.saveAccount(this.user, scanner);
+                break;
         }
     }
+
 
     // EFFECTS: prints website information, allows user to see account information for a specific website
     public void viewWebsites() {
@@ -423,6 +421,7 @@ public class PasswordVault {
         System.out.println("Enter 'P' to view passwords");
         System.out.println("Enter 'W' to view websites");
         System.out.println("Enter 'U' to view usernames");
+        System.out.println("Enter 'S' to save user profile");
         System.out.println("Enter 'Q' to quit and logout");
     }
 
@@ -470,6 +469,8 @@ public class PasswordVault {
     public void login() {
         printDivider();
         System.out.println("Please enter your login! (press q to quit)");
+        
+        
         while (!loggedIn) {
             String input = this.scanner.next();
             if (input.equals("testAccount")) {
@@ -478,11 +479,37 @@ public class PasswordVault {
                 this.loggedIn = true;
             } else if (input.equals("q")) {
                 return;
-            } else {
+            } 
+
+            try {
+                User user = Login.loginToAccount(input);
+                if (passwordEntry(user)) {
+                    this.user = user;
+                    this.loggedIn = true;
+                } else {
+                    System.out.println("Please enter your login! (press q to quit)");
+                }
+            } catch (IOException e) {
                 System.out.println("Hmm... username not found. Please try again!");
             }
         }
         welcomeUser();
+    }
+
+    // EFFECTS: checks if password entered is correct for user.
+    private boolean passwordEntry(User user) {
+        System.out.println("Please enter password");
+        String input = this.scanner.next();
+        if (input.equals(user.getPassword().getPassword())) {
+            return true;
+        } else {
+            System.out.println("Incorrect password entered. Would you like to continue? (Y/N)");
+            input = this.scanner.next();
+            if (input.equals("y")) {
+                passwordEntry(user);
+            }
+            return false;
+        }
     }
 
     // MODIFIES: this
