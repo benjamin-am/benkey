@@ -420,6 +420,10 @@ public class PasswordVault {
         printDivider();
         System.out.println("Please enter your username");
         String user = scanner.next();
+        while (Saving.checkUserExists(user)) {
+            System.out.println("That user already exists. Please enter a new username!");
+            user = scanner.next();
+        }
         System.out.println("Please enter your password");
         String pass = scanner.next();
         this.user = new User(user, pass);
@@ -485,9 +489,9 @@ public class PasswordVault {
             return true;
         } else {
             System.out.println("Incorrect password entered. Would you like to continue? (Y/N)");
-            input = this.scanner.next();
+            input = this.scanner.next().toLowerCase();
             if (input.equals("y")) {
-                passwordEntry(user);
+                return passwordEntry(user);
             }
             return false;
         }
