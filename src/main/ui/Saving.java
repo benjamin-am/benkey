@@ -15,6 +15,7 @@ public class Saving {
     private Saving() {
     }
 
+    // REQUIRES: a user's username must be unique, unless user is overwriting their profile
     // MODIFIES: user
     // EFFECTS: Save user to file
     public static void saveAccount(User user, Scanner scanner) {
