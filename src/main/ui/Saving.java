@@ -23,6 +23,7 @@ public class Saving {
             write.open();
             write.write(user);
             System.out.println("Account information saved!");
+            write.close();
         } catch (FileNotFoundException e) {
             System.out.println("Username contains illegal character. Please enter a new username!");
             String input = scanner.next();
