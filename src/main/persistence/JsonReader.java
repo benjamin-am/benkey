@@ -12,7 +12,7 @@ import org.json.JSONObject;
 import model.*;
 
 // Most of this class is based off of the JsonReader example JsonSerializationDemo
-// Represents a reader that reads workroom from JSON data stored in file
+// Represents a reader that reads a User profile from JSON data stored in file
 public class JsonReader {
     private String source;
 
@@ -21,7 +21,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads user from file and returns it;
     // throws IOException if an error occurs reading data from file
     public User read() throws IOException {
         String jsonData = readFile(source);

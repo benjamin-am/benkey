@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import model.User;
 
 // Most of this class is based off of the JsonReader example from JsonSerializationDemo
-// Represents a writer that writes JSON representation of workroom to file
+// Represents a writer that writes JSON representation of a User profile to file
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
