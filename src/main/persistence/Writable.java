@@ -1,6 +1,6 @@
 package persistence;
-// Based on the Writable class in the JsonSerializationDemo
 
+// Based on the Writable class in the JsonSerializationDemo
 import org.json.JSONObject;
 
 public interface Writable {
