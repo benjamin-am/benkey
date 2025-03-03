@@ -63,8 +63,6 @@ public class TestUser {
     @Test
     void testgenerateRandomPassword() {
         String pass = User.generateRandomPassword();
-        String availableChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz" 
-                                + "1234567890!@#$%^&*";
         assertEquals(20, pass.length());
         assertFalse(pass.isEmpty());
     }
