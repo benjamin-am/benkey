@@ -62,23 +62,27 @@ public class Website implements Writable {
     // EFFECTS: checks if object equals website
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
-        if (getClass() != obj.getClass())
-            return false;
+        }
         Website other = (Website) obj;
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
+        }
         if (url == null) {
-            if (other.url != null)
+            if (other.url != null) {
                 return false;
-        } else if (!url.equals(other.url))
+            }
+        } else if (!url.equals(other.url)) {
             return false;
+        }
         return true;
     }
 
