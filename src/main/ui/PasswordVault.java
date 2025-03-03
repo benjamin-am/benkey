@@ -46,6 +46,7 @@ public class PasswordVault {
     }
 
     // EFFECTS: selects an option from the main menu
+    @SuppressWarnings("methodlength")
     public void menuSwitch(String input) {
         input = input.toLowerCase();
         printDivider();
@@ -458,11 +459,7 @@ public class PasswordVault {
         
         while (!loggedIn) {
             String input = this.scanner.next();
-            if (input.equals("testAccount")) {
-                this.user = new User("benTest", "funtest");
-                initializeTestUser();
-                this.loggedIn = true;
-            } else if (input.equals("q")) {
+            if (input.equals("q")) {
                 return;
             } 
 
@@ -495,21 +492,6 @@ public class PasswordVault {
             }
             return false;
         }
-    }
-
-    // MODIFIES: this
-    // EFFECTS: sets up dummy accounts and passwords for test user
-    public void initializeTestUser() {
-        Website netflix = new Website("netflix", "netflix.com");
-        Website amazon = new Website("amazon", "amazon.com");
-        Website youtube = new Website("youtube", "youtube.com");
-
-        Account a1 =  new Account(netflix, "bensNetflix", "badNetflixPassword");
-        Account a2 =  new Account(amazon, "bensAmazon", "AmazingAmazonPassword123$#");
-        Account a3 =  new Account(youtube, "bensYoutube", "MediocreYoutube123");
-        user.addAccount(a1);
-        user.addAccount(a2);
-        user.addAccount(a3);
     }
         
     // EFFECTS: prints out a divider 
