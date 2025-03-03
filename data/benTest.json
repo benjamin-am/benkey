@@ -1,0 +1,30 @@
+{
+    "password": {"password": "funtestC1"},
+    "accounts": [
+        {
+            "website": {
+                "nameWebsite": "netflix",
+                "url": "netflix.com"
+            },
+            "password": {"password": "badNetflixPasswordC1"},
+            "username": "bensNetflix"
+        },
+        {
+            "website": {
+                "nameWebsite": "amazon",
+                "url": "amazon.com"
+            },
+            "password": {"password": "AmazingAmazonPassword123$#C1"},
+            "username": "bensAmazon"
+        },
+        {
+            "website": {
+                "nameWebsite": "youtube",
+                "url": "youtube.com"
+            },
+            "password": {"password": "MediocreYoutube123C1"},
+            "username": "bensYoutube"
+        }
+    ],
+    "user": "benTest"
+}
