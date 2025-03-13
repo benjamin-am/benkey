@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 
 import java.awt.CardLayout;
 import java.awt.FlowLayout;
+import java.util.HashMap;
+import java.util.Map;
 import java.awt.BorderLayout;
 
 import model.*;
@@ -13,24 +15,24 @@ import model.*;
 // https://stackoverflow.com/questions/17477891/how-do-i-use-cardlayout-for-my-java-program-for-login-and-menu-items
 // https://www.youtube.com/watch?v=XBFT0N-Qbm4
 public class PasswordVaultGUI extends JFrame {
-
-    public static final int WIDTH = 1000;
-	public static final int HEIGHT = 700;
+    public static final int WIDTH = 500;
+    public static final int HEIGHT = 500;
     private boolean loggedIn;
     private User user;
+    private Map<String, JPanel> panels;
+    private CardLayout cl;
     private JPanel cardPanel;
-    private IntroPanel introPanel;
-    private LoginPanel loginPanel;
-    private AccountPanel newAccountPanel;
     private Defaults defaults = Defaults.getDefaults();
-    private final static String LOGIN = "login";
-    private final static String NEW_ACCOUNT = "account";
-    private final static String INTRO = "intro";
+    private static final String LOGIN = "login";
+    private static final String NEW_ACCOUNT = "account";
+    private static final String INTRO = "intro";
+    private static final String HOME = "home";
 
 
     // EFFECTS: Constructs PasswordVaultGUI
     public PasswordVaultGUI() {
         super("benkey");
+        this.panels = new HashMap<>();
         initJFrame();
     }
 
@@ -40,37 +42,55 @@ public class PasswordVaultGUI extends JFrame {
         // this.setLayout(new BorderLayout(5, 5));
         this.setSize(WIDTH, HEIGHT);
         this.setLocationRelativeTo(null);
-        this.setVisible(true);
         createPanels();
         setUpCardPanel();
         this.add(cardPanel);
-        this.pack();
         changeScreen(INTRO);
+        this.setVisible(true);
+        // setFocusablePanels();
     }
 
     // MODIFIES: this
     // EFFECTS: creates panel instances
     public void createPanels() {
-        this.introPanel = new IntroPanel(this);
-        this.loginPanel = new LoginPanel(this);
-        this.newAccountPanel = new AccountPanel(this);
-        
+        panels.put(INTRO, new IntroPanel(this));
+        panels.put(LOGIN, new LoginPanel(this));
+        panels.put(NEW_ACCOUNT, new AccountPanel(this));
+        panels.put(HOME, new HomePanel(this));
     }
+
+    // // MODIFIES: this
+    // // EFFECTS: sets panels as focusable
+    // public void setFocusablePanels() {
+    //     for (JPanel panel : panels.values()) {
+    //         panel.requestFocus();
+    //         panel.setFocusable(true);
+    //     }
+    // }
 
     // MODIFIES: this
     // EFFECTS: Generates the panels, and adds them to card panel
     private void setUpCardPanel() {
-        this.cardPanel = new JPanel(new CardLayout());
-        cardPanel.add(introPanel, INTRO);
-        cardPanel.add(loginPanel, LOGIN);
-        cardPanel.add(newAccountPanel, NEW_ACCOUNT);
+        this.cl = new CardLayout();
+        this.cardPanel = new JPanel(cl);
+        
+        for (String key : panels.keySet()) {
+            cardPanel.add(panels.get(key), key);
+        }
     }
 
     // EFFECTS: Change Screen in card layout
     // ATTRIBUTION: https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html
     public void changeScreen(String card) {
-        CardLayout cl = (CardLayout)(cardPanel.getLayout());
         cl.show(cardPanel, card);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: set user, loggedin now true. swap to home panel.
+    public void userSignIn(User user) {
+        this.user = user;
+        this.loggedIn = true;
+        changeScreen(HOME);
     }
 
     // getters
