@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 import model.User;
 
@@ -89,21 +90,17 @@ public class LoginPanel extends JPanel implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: attempt to login to user account
-    // ATTRIBUTION: sleep so you can see success message https://stackoverflow.com/questions/24104313/how-do-i-make-a-delay-in-java
+    // ATTRIBUTION: timer so you can see success message https://stackoverflow.com/questions/1006611/java-swing-timer
     private void loginAttempt(String user, String pass) {
         try {
             User username = Login.loginToAccount(user);
             if (username.getPassword().getPassword().equals(pass)) {
                 messageLabel.setText("Login successful!");
                 messageLabel.setForeground(Color.green);
-                this.repaint();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e1) {
-                    Thread.currentThread().interrupt();
-                }
-                passVault.userSignIn(username);
-
+                Timer timer = new Timer(1000, e -> {
+                    passVault.userSignIn(username);
+                });
+                timer.start();
             } else {
                 messageLabel.setText("Incorrect password!");
                 messageLabel.setForeground(Color.pink);
