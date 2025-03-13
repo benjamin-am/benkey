@@ -1,43 +1,119 @@
 package ui.gui;
 
+import ui.Login;
 import java.awt.Color;
-import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
+import model.User;
 
-public class LoginPanel extends JPanel {
+// Panel for benkey login page
+// ATTRIBUTION: https://www.youtube.com/watch?v=Hiv3gwJC5kw&t=1651s
+// brocode helped me with ActionListener and general set up
+// TODO:
+// ATTRIBUTION: https://www.youtube.com/watch?v=IyfB0u9g2x0
+// this brocode video helped me with keybindings
+public class LoginPanel extends JPanel implements ActionListener {
     private Defaults defaults = Defaults.getDefaults();
     private PasswordVaultGUI passVault;
     private JPasswordField password;
+    private JTextField userIDField;
     private JButton backButton;
+    private JButton loginButton;
+    private JLabel messageLabel;
 
 
+    // EFFECTS: creates a LoginPanel JPanel
     public LoginPanel(PasswordVaultGUI passVault) {
-        password = new JPasswordField();
         this.passVault = passVault;
-        this.setBackground(Color.red);
+        this.setBackground(defaults.getBackgroundColor());
         this.setBounds(0, 0, 250, 250);
         
-        JLabel label = new JLabel();
-        label.setText("Login screen");
-        label.setFont(defaults.getFont());
-
-        this.setLayout(new FlowLayout());
-        this.add(label);
-        backButtonInit();
+        JLabel welcomeNote = LabelFactory.createLabel("benkey Vault Login", 100, 25, 300, 150, true);
+        JLabel userLabel = LabelFactory.createLabel("Username:", 50, 150, 100, 20);
+        JLabel passwordLabel = LabelFactory.createLabel("Password:", 50, 200, 100, 20);
+        messageLabel = LabelFactory.createLabel("", 150, 300, 500, 50);
+        userIDField = new JTextField();
+        password = new JPasswordField();
+        userIDField.setBounds(160, 150, 150, 20);
+        password.setBounds(160, 200, 150, 20);
+        this.setLayout(null);
+        this.add(userLabel);
+        this.add(userIDField);
+        this.add(passwordLabel);
+        this.add(password);
+        this.add(messageLabel);
+        this.add(welcomeNote);
+        buttonInit();
+        this.add(loginButton);
         this.add(backButton);
     }
 
-    // EFFECTS: sets up login button
-    private void backButtonInit() {
-        backButton = new JButton("Back");
-        backButton.setBounds(200, 100, 100, 50);
-        backButton.addActionListener(e -> passVault.changeScreen(PasswordVaultGUI.getIntro()));
-        backButton.setFont(defaults.getFont());
+    // EFFECTS: Initialize buttons
+    private void buttonInit() {
+        backButtonInit();
+        loginButtonInit();
     }
+
+    // MODIFIES: this
+    // EFFECTS: sets up back button
+    private void backButtonInit() {
+        backButton = ButtonFactory.createButton("Back", 140, 250, 100, 50);
+        backButton.addActionListener(e -> passVault.changeScreen(PasswordVaultGUI.getIntro()));
+    }
+
+    // MODIFIES: this
+    // EFFECTS: sets up login button
+    private void loginButtonInit() {
+        loginButton = ButtonFactory.createButton("Login", 260, 250, 100, 50, this);
+    }
+
+    // EFFECTS: Performs actions on buttons
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == loginButton) {
+            String user = userIDField.getText();
+            String pass = String.valueOf(password.getPassword());
+            loginAttempt(user, pass);  
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: attempt to login to user account
+    // ATTRIBUTION: sleep so you can see success message https://stackoverflow.com/questions/24104313/how-do-i-make-a-delay-in-java
+    private void loginAttempt(String user, String pass) {
+        try {
+            User username = Login.loginToAccount(user);
+            if (username.getPassword().getPassword().equals(pass)) {
+                messageLabel.setText("Login successful!");
+                messageLabel.setForeground(Color.green);
+                this.repaint();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e1) {
+                    Thread.currentThread().interrupt();
+                }
+                passVault.userSignIn(username);
+
+            } else {
+                messageLabel.setText("Incorrect password!");
+                messageLabel.setForeground(Color.pink);
+            }
+        } catch (IOException e1) {
+            messageLabel.setText("Username doesn't exist!");
+            messageLabel.setForeground(Color.pink);
+        }
+    }
+
+    
 
 }
