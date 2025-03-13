@@ -10,21 +10,40 @@ public class LabelFactory {
     public static JLabel createLabel(String text, int x, int y, int width, int height) {
         JLabel label = new JLabel(text);
         label.setBounds(x, y, width, height);
-        label.setFont(defaults.getFont());
+        fontAndColor(label);
         return label;
+    }
+
+    // EFFECTS: creates a header label
+    public static JLabel createLabel(String text, int x, int y, int width, int height, boolean header) {
+        if (header) {
+            JLabel label = new JLabel(text);
+            label.setBounds(x, y, width, height);
+            label.setFont(defaults.getHeaderFont());
+            label.setForeground(defaults.getFontColor());
+            return label;
+        } else {
+            return createLabel(text, x, y, width, height);
+        }
     }
 
     // EFFECTS: Creates a label
     public static JLabel createLabel(String text) {
         JLabel label = new JLabel(text);
-        label.setFont(defaults.getFont());
+        fontAndColor(label);
         return label;
+    }
+
+    // EFFECTS: sets font and color to label
+    private static void fontAndColor(JLabel label) {
+        label.setFont(defaults.getFont());
+        label.setForeground(defaults.getFontColor());
     }
 
     // EFFECTS: Creates a label
     public static JLabel createLabel() {
         JLabel label = new JLabel();
-        label.setFont(defaults.getFont());
+        fontAndColor(label);
         return label;
     }
 }
