@@ -1,5 +1,7 @@
 package ui.gui;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 // Button Factory based on https://refactoring.guru/design-patterns/factory-method
@@ -12,6 +14,16 @@ public class ButtonFactory {
         button.setBounds(x, y, width, height);
         button.setFont(defaults.getFont());
         button.setFocusable(false);
+        return button;
+    }
+
+    // EFFECTS: Creates a button to use in a JPanel or JFrame
+    public static JButton createButton(String text, int x, int y, int width, int height, ActionListener al) {
+        JButton button = new JButton(text);
+        button.setBounds(x, y, width, height);
+        button.setFont(defaults.getFont());
+        button.setFocusable(false);
+        button.addActionListener(al);
         return button;
     }
 
