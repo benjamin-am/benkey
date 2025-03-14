@@ -10,6 +10,7 @@ public class Defaults {
     private Color background;
     private Color fontColor;
     private Font headerFont;
+    private Color buttonColor;
 
 
     // EFFECTS: initialize Defaults
@@ -18,6 +19,7 @@ public class Defaults {
         headerFont = new Font("Lucida Sans", Font.BOLD, 30);
         background = Color.decode("#2D2D2D");
         fontColor = Color.decode("#E1E1E1");
+        buttonColor = Color.decode("#D3D3D3");
     }
 
     // EFFECTS: returns Defaults object
@@ -37,6 +39,11 @@ public class Defaults {
     // EFFECTS: returns font
     public Font getHeaderFont() {
         return headerFont;
+    }
+
+    // EFFECTS: returns button color
+    public Color getButtonColor() {
+        return buttonColor;
     }
 
     // EFFECTS: returns font
