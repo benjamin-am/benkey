@@ -1,26 +1,17 @@
 package ui.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
+
 import java.awt.FlowLayout;
-import java.awt.Label;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class IntroPanel extends JPanel {
+public class IntroPanel extends Panel {
     private JButton loginButton;
     private JButton accountButton;
-    private Defaults defaults = Defaults.getDefaults();
-    private PasswordVaultGUI passVault;
 
     public IntroPanel(PasswordVaultGUI passVault) {
-        this.passVault = passVault;
-        this.setBackground(defaults.getBackgroundColor());
-        this.setBounds(0, 0, 250, 250);
+        super(passVault);
         
         JLabel label = LabelFactory.createLabel("<html>Welcome to benkey.<br/> Please login or create a new account.</html>");
         
@@ -39,13 +30,13 @@ public class IntroPanel extends JPanel {
 
     // EFFECTS: sets up new account button
     private void newAccountButtonInit() {
-        accountButton = ButtonFactory.createButton("New Account", 200, 200, 100, 50);
+        accountButton = ButtonFactory.createButton("New Account", 200, 200, 200, 50, false);
         accountButton.addActionListener(e -> passVault.changeScreen(PasswordVaultGUI.getNewAccount()));
     }
 
     // EFFECTS: sets up login button
     private void loginButtonInit() {
-        loginButton = ButtonFactory.createButton("Login", 200, 100, 100, 50);
+        loginButton = ButtonFactory.createButton("Login", 200, 100, 200, 50, false);
         loginButton.addActionListener(e -> passVault.changeScreen(PasswordVaultGUI.getLogin()));
     }
     

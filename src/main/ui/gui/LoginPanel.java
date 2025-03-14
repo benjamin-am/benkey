@@ -10,7 +10,6 @@ import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.Timer;
@@ -23,9 +22,7 @@ import model.User;
 // TODO:
 // ATTRIBUTION: https://www.youtube.com/watch?v=IyfB0u9g2x0
 // this brocode video helped me with keybindings
-public class LoginPanel extends JPanel implements ActionListener {
-    private Defaults defaults = Defaults.getDefaults();
-    private PasswordVaultGUI passVault;
+public class LoginPanel extends Panel implements ActionListener {
     private JPasswordField password;
     private JTextField userIDField;
     private JButton backButton;
@@ -35,9 +32,7 @@ public class LoginPanel extends JPanel implements ActionListener {
 
     // EFFECTS: creates a LoginPanel JPanel
     public LoginPanel(PasswordVaultGUI passVault) {
-        this.passVault = passVault;
-        this.setBackground(defaults.getBackgroundColor());
-        this.setBounds(0, 0, 250, 250);
+        super(passVault);
         
         JLabel welcomeNote = LabelFactory.createLabel("benkey Vault Login", 100, 25, 300, 150, true);
         JLabel userLabel = LabelFactory.createLabel("Username:", 50, 150, 100, 20);
