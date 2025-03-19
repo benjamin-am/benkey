@@ -4,10 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.CardLayout;
-import java.awt.FlowLayout;
 import java.util.HashMap;
 import java.util.Map;
-import java.awt.BorderLayout;
 
 import model.*;
 
@@ -39,7 +37,6 @@ public class PasswordVaultGUI extends JFrame {
     // EFFECTS: Initialize the JFrame and panels for the GUI
     private void initJFrame() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // this.setLayout(new BorderLayout(5, 5));
         this.setSize(WIDTH, HEIGHT);
         this.setLocationRelativeTo(null);
         createPanels();
@@ -47,7 +44,6 @@ public class PasswordVaultGUI extends JFrame {
         this.add(cardPanel);
         changeScreen(INTRO);
         this.setVisible(true);
-        // setFocusablePanels();
     }
 
     // MODIFIES: this
@@ -55,18 +51,9 @@ public class PasswordVaultGUI extends JFrame {
     public void createPanels() {
         panels.put(INTRO, new IntroPanel(this));
         panels.put(LOGIN, new LoginPanel(this));
-        panels.put(NEW_ACCOUNT, new AccountPanel(this));
-        panels.put(HOME, new HomePanel(this));
+        panels.put(NEW_ACCOUNT, new NewUserPanel(this));
     }
 
-    // // MODIFIES: this
-    // // EFFECTS: sets panels as focusable
-    // public void setFocusablePanels() {
-    //     for (JPanel panel : panels.values()) {
-    //         panel.requestFocus();
-    //         panel.setFocusable(true);
-    //     }
-    // }
 
     // MODIFIES: this
     // EFFECTS: Generates the panels, and adds them to card panel
@@ -82,14 +69,18 @@ public class PasswordVaultGUI extends JFrame {
     // EFFECTS: Change Screen in card layout
     // ATTRIBUTION: https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html
     public void changeScreen(String card) {
+        System.out.println("Switching to: " + card);
         cl.show(cardPanel, card);
     }
 
     // MODIFIES: this
-    // EFFECTS: set user, loggedin now true. swap to home panel.
+    // EFFECTS: set user, loggedin now true. Add home panel
+    // here, since you will be logged in at this point swap to home panel.
     public void userSignIn(User user) {
         this.user = user;
         this.loggedIn = true;
+        panels.put(HOME, new HomePanel(this));
+        cardPanel.add(panels.get(HOME), HOME);
         changeScreen(HOME);
     }
 
@@ -104,6 +95,22 @@ public class PasswordVaultGUI extends JFrame {
     
     public static String getIntro() {
         return INTRO;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getUsersName() {
+        return user.getUsername();
+    }
+
+    public void setLoggedIn(boolean status) {
+        this.loggedIn = status;
+    }
+
+    public Boolean getLoggedIn() {
+        return loggedIn;
     }
 
 }

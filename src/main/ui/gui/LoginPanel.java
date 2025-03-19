@@ -95,6 +95,7 @@ public class LoginPanel extends Panel implements ActionListener {
                 Timer timer = new Timer(1000, e -> {
                     passVault.userSignIn(username);
                 });
+                timer.setRepeats(false);
                 timer.start();
             } else {
                 messageLabel.setText("Incorrect password!");

@@ -12,4 +12,10 @@ public abstract class Panel extends JPanel {
         this.setBounds(0, 0, 500, 500);
     }
 
+    public Panel(PasswordVaultGUI passVault, int width, int height) {
+        this.passVault = passVault;
+        this.setBackground(defaults.getBackgroundColor());
+        this.setBounds(0, 0, width, height);
+    }
+
 }
