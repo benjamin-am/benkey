@@ -1,10 +1,14 @@
-package ui.gui;
+package ui.gui.panels;
 
 
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
+import ui.gui.ButtonFactory;
+import ui.gui.LabelFactory;
+import ui.gui.PasswordVaultGUI;
 
 public class IntroPanel extends Panel {
     private JButton loginButton;

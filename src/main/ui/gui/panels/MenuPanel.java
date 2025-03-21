@@ -1,8 +1,11 @@
-package ui.gui;
+package ui.gui.panels;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+
+import ui.gui.ButtonFactory;
+import ui.gui.PasswordVaultGUI;
 
 public class MenuPanel extends Panel {
     BoxLayout boxLayout;

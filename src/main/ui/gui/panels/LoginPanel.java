@@ -1,6 +1,10 @@
-package ui.gui;
+package ui.gui.panels;
 
 import ui.Login;
+import ui.gui.ButtonFactory;
+import ui.gui.LabelFactory;
+import ui.gui.PasswordVaultGUI;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

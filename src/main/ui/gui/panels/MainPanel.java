@@ -1,4 +1,4 @@
-package ui.gui;
+package ui.gui.panels;
 
 import java.awt.CardLayout;
 import java.util.HashMap;
@@ -6,31 +6,17 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
+import ui.gui.PasswordVaultGUI;
+
 public class MainPanel extends Panel {
-    private Map<String, JPanel> panels;
+    private Map<String, Panel> panels;
     private CardLayout cl;
     private JPanel cardPanel;
     private static final String BASE = "base";
     private static final String ACCOUNT = "account";
-    private static final String INTRO = "intro";
-    private static final String HOME = "home";
+    private static final String ADD = "add";
+    private static final String REMOVE = "remove";
 
-    // Getters
-    public static String getBase() {
-        return BASE;
-    }
-
-    public static String getAccount() {
-        return ACCOUNT;
-    }
-
-    public static String getIntro() {
-        return INTRO;
-    }
-
-    public static String getHome() {
-        return HOME;
-    }
 
     public MainPanel(PasswordVaultGUI passVault) {
         super(passVault);
@@ -45,8 +31,14 @@ public class MainPanel extends Panel {
     // EFFECTS: creates panel instances
     private void createPanels() {
         panels.put(BASE, new BasePanel(passVault));
-        panels.put(ACCOUNT, new AccountPanel(passVault));
-        
+        panels.put(ACCOUNT, new AccountPanel(passVault, this));
+        panels.put(ADD, new AddAccountPanel(passVault, this));
+        panels.put(REMOVE, new RemoveAccountPanel(passVault, this));
+    }
+
+    // EFFECTS: returns panel from collection
+    public Panel getPanel(String label) {
+        return this.panels.get(label);
     }
 
     // MODIFIES: this
@@ -65,6 +57,33 @@ public class MainPanel extends Panel {
     public void changeScreen(String card) {
         System.out.println("Switching to: " + card);
         cl.show(cardPanel, card);
+    }
+
+      // Getters
+      public static String getBase() {
+        return BASE;
+    }
+
+    public static String getAccount() {
+        return ACCOUNT;
+    }
+
+    public static String getAdd() {
+        return ADD;
+    }
+
+    public static String getRemove() {
+        return REMOVE;
+    }
+
+    @Override 
+    public void refreshPanel() {
+        for (Panel panel : panels.values()) {
+            panel.refreshPanel();
+        }
+
+        revalidate();
+        repaint();
     }
 
 }
