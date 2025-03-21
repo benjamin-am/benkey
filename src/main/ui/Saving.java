@@ -35,6 +35,20 @@ public class Saving {
         }        
     }
 
+    // REQUIRES: a user's username must be unique, unless user is overwriting their profile
+    // MODIFIES: user
+    // EFFECTS: Save user to file
+    public static void saveAccount(User user) {
+        JsonWriter write = new JsonWriter(path + user.getUsername() + ext);
+        try {
+            write.open();
+            write.write(user);
+            write.close();
+        } catch (FileNotFoundException e) {
+            
+        }        
+    }
+
     // Attribution: https://stackoverflow.com/questions/1816673/how-do-i-check-if-a-file-exists-in-java
     // wanted to find a way to see if a file exists, so I don't have multiple usernames for User
     // EFFECTS: checks if user profile already exists
