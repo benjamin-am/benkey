@@ -98,6 +98,9 @@ public class LoginPanel extends Panel implements ActionListener {
                 messageLabel.setForeground(Color.green);
                 Timer timer = new Timer(1000, e -> {
                     passVault.userSignIn(username);
+                    messageLabel.setText("");
+                    userIDField.setText("");
+                    password.setText("");
                 });
                 timer.setRepeats(false);
                 timer.start();
@@ -108,7 +111,7 @@ public class LoginPanel extends Panel implements ActionListener {
         } catch (IOException e1) {
             messageLabel.setText("Username doesn't exist!");
             messageLabel.setForeground(Color.pink);
-        }
+        } 
     }
 
     
