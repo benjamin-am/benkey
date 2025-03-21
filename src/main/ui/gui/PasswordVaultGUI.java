@@ -8,19 +8,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 import model.*;
+import ui.gui.panels.HomePanel;
+import ui.gui.panels.IntroPanel;
+import ui.gui.panels.LoginPanel;
+import ui.gui.panels.NewUserPanel;
+import ui.gui.panels.Panel;
 
 // ATTRIBUTION: DrawingEditor, Alarm Controller, and Swing documentation
 // https://stackoverflow.com/questions/17477891/how-do-i-use-cardlayout-for-my-java-program-for-login-and-menu-items
 // https://www.youtube.com/watch?v=XBFT0N-Qbm4
 public class PasswordVaultGUI extends JFrame {
-    public static final int WIDTH = 500;
-    public static final int HEIGHT = 500;
+    private Defaults defaults = Defaults.getDefaults();
     private boolean loggedIn;
     private User user;
-    private Map<String, JPanel> panels;
+    private Map<String, Panel> panels;
     private CardLayout cl;
     private JPanel cardPanel;
-    private Defaults defaults = Defaults.getDefaults();
     private static final String LOGIN = "login";
     private static final String NEW_ACCOUNT = "account";
     private static final String INTRO = "intro";
@@ -37,7 +40,7 @@ public class PasswordVaultGUI extends JFrame {
     // EFFECTS: Initialize the JFrame and panels for the GUI
     private void initJFrame() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(WIDTH, HEIGHT);
+        this.setSize(Defaults.getWidth(), Defaults.getHeight());
         this.setLocationRelativeTo(null);
         createPanels();
         setUpCardPanel();
@@ -82,6 +85,30 @@ public class PasswordVaultGUI extends JFrame {
         panels.put(HOME, new HomePanel(this));
         cardPanel.add(panels.get(HOME), HOME);
         changeScreen(HOME);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: logouts of user, goes back to intro
+    public void logout() {
+        this.user = null;
+        this.loggedIn = false;
+        changeScreen(INTRO);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: add account to user
+    public void addAccount(String username, String password, String website) {
+        Website web = new Website(website, website);
+        Account account = new Account(web, username, password);
+        user.addAccount(account);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: removes an account from user 
+    public void removeAccount(String user, String website) {
+        Account account = this.user.findAccountWebsiteAccountName(user, website);
+        this.user.removeAccount(account);
+
     }
 
     // getters
