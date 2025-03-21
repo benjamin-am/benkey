@@ -34,6 +34,18 @@ public class LabelFactory {
         }
     }
 
+    // EFFECTS: creates a header label
+    public static JLabel createLabel(String text, boolean header) {
+        if (header) {
+            JLabel label = new JLabel(text);
+            label.setFont(defaults.getHeaderFont());
+            label.setForeground(defaults.getFontColor());
+            return label;
+        } else {
+            return createLabel(text);
+        }
+    }
+
     // EFFECTS: Creates a label
     public static JLabel createLabel(String text) {
         JLabel label = new JLabel(text);
