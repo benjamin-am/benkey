@@ -14,6 +14,7 @@ import javax.swing.JTable;
 
 import model.Account;
 import model.User;
+import ui.Saving;
 import ui.gui.ButtonFactory;
 import ui.gui.LabelFactory;
 import ui.gui.PasswordVaultGUI;
@@ -36,9 +37,8 @@ public class AccountPanel extends Panel {
         
         table = new JTable(accountsToArray(), colNames);
         // table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-
         sp = new JScrollPane(table);
-        
+        sp.setPreferredSize(new Dimension(600, 300)); 
 
         message = LabelFactory.createLabel("<html><p>You have " + passVault.getUser().totalAccounts() + " accounts for " 
                 + passVault.getUser().totalWebsites() + " websites.<br/> Would you like to modify any accounts?</p></html>");
@@ -57,7 +57,7 @@ public class AccountPanel extends Panel {
     @Override
     public void refreshPanel() {
         table.setModel(new javax.swing.table.DefaultTableModel(accountsToArray(), colNames));
-        sp.setPreferredSize(new Dimension(600, Math.min(300, table.getRowCount() * 30 + 50))); // Resize dynamically
+        sp.setPreferredSize(new Dimension(600, 300)); // Adjust the size as needed
         message.setText("<html><p>You have " + passVault.getUser().totalAccounts() +
                 " accounts for " + passVault.getUser().totalWebsites() +
                 " websites.<br/> Would you like to modify any accounts?</p></html>");
@@ -78,7 +78,7 @@ public class AccountPanel extends Panel {
         JButton remove = ButtonFactory.createButton("Remove", 0, 0, 200, 50, false);
         remove.addActionListener(e -> main.changeScreen(MainPanel.getRemove()));
 
-        buttonPanel = new HorizontalButtonPanel(passVault, List.of(account, back, remove));
+        buttonPanel = new HorizontalButtonPanel(passVault, List.of(account, remove, back));
         c.gridy = 2;
         this.add(buttonPanel, c);
     }
