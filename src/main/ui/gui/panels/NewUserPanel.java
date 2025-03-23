@@ -5,7 +5,6 @@ import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -28,43 +27,43 @@ public class NewUserPanel extends Panel implements ActionListener {
     private JTextField username;
     private HorizontalButtonPanel buttons;
     private GridBagLayout gl;
-    private GridBagConstraints c;
+    private GridBagConstraints gbc;
     private JLabel hiddenLabel;
 
 
     public NewUserPanel(PasswordVaultGUI passVault) {
         super(passVault);
         gl = new GridBagLayout();
-        c = new GridBagConstraints();
+        gbc = new GridBagConstraints();
         this.setLayout(gl);
-        c.gridx = 0;
-        c.anchor = GridBagConstraints.CENTER;
-        c.gridy = 0;
-        c.insets = new Insets(5, 5, 5, 5);
-        c.fill = GridBagConstraints.BOTH;
-        this.add(LabelFactory.createLabel("Enter user information ", true), c);  
+        gbc.gridx = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.BOTH;
+        this.add(LabelFactory.createLabel("Enter user information ", true), gbc);  
         textInit();
         buttonInit();
-        c = new GridBagConstraints();
-        c.gridwidth = 1;
-        c.gridheight = 1;
-        c.gridy = 4;
-        c.anchor = c.anchor = GridBagConstraints.PAGE_END;
-        c.fill = GridBagConstraints.BOTH;
+        gbc = new GridBagConstraints();
+        gbc.gridwidth = 1;
+        gbc.gridheight = 1;
+        gbc.gridy = 4;
+        gbc.anchor = gbc.anchor = GridBagConstraints.PAGE_END;
+        gbc.fill = GridBagConstraints.BOTH;
         hiddenLabel = LabelFactory.createLabel("", 0, 0, 400, 40);
-        this.add(hiddenLabel, c);
+        this.add(hiddenLabel, gbc);
         // this.setPreferredSize(getPreferredSize());
     }
 
-     private void initLabelTextPairs(JLabel label, JTextField textfield, int x, int y) {
+    private void initLabelTextPairs(JLabel label, JTextField textfield, int x, int y) {
         List<Component> listComp = new ArrayList<>();
         listComp.add(label);
         listComp.add(textfield);
         HorizontalLabelTextFieldPanel panel = new HorizontalLabelTextFieldPanel(passVault, listComp);
-        c.gridy = y;
-        c.gridx = x;
-        c.fill = GridBagConstraints.HORIZONTAL;
-        this.add(panel, c);
+        gbc.gridy = y;
+        gbc.gridx = x;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        this.add(panel, gbc);
     }
 
     private void textInit() {
@@ -87,10 +86,10 @@ public class NewUserPanel extends Panel implements ActionListener {
         account.addActionListener(this);
         
         this.buttons = new HorizontalButtonPanel(passVault, List.of(account, backButton));
-        c.gridx = 0;
-        c.gridy = 3; 
-        c.anchor = GridBagConstraints.CENTER; 
-        this.add(buttons, c);
+        gbc.gridx = 0;
+        gbc.gridy = 3; 
+        gbc.anchor = GridBagConstraints.CENTER; 
+        this.add(buttons, gbc);
     }
 
     @Override
