@@ -18,6 +18,7 @@ public class MainPanel extends Panel {
     private static final String ADD = "add";
     private static final String REMOVE = "remove";
     private static final String WEBSITE = "website";
+    private static final String PASSWORD = "password";
 
     // EFFECTS: initializes Main Panel construction, initial values set and components added
     public MainPanel(PasswordVaultGUI passVault) {
@@ -37,6 +38,7 @@ public class MainPanel extends Panel {
         panels.put(ADD, new AddAccountPanel(passVault, this));
         panels.put(REMOVE, new RemoveAccountPanel(passVault, this));
         panels.put(WEBSITE, new WebsitePanel(passVault, this));
+        panels.put(PASSWORD, new PasswordPanel(passVault, this));
     }
 
     // EFFECTS: returns panel from collection
@@ -62,6 +64,18 @@ public class MainPanel extends Panel {
         cl.show(cardPanel, card);
     }
 
+    // MODIFIES: this
+    // EFFECTS: refreshes all panels in collection
+    @Override 
+    public void refreshPanel() {
+        for (Panel panel : panels.values()) {
+            panel.refreshPanel();
+        }
+
+        revalidate();
+        repaint();
+    }
+
     // Getters
     public static String getBase() {
         return BASE;
@@ -83,16 +97,8 @@ public class MainPanel extends Panel {
         return WEBSITE;
     }
 
-    // MODIFIES: this
-    // EFFECTS: refreshes all panels in collection
-    @Override 
-    public void refreshPanel() {
-        for (Panel panel : panels.values()) {
-            panel.refreshPanel();
-        }
-
-        revalidate();
-        repaint();
+    public static String getPassword() {
+        return PASSWORD;
     }
 
 }
