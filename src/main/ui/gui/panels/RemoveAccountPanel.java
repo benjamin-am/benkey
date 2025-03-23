@@ -5,9 +5,12 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.Timer;
+
 
 import ui.gui.ButtonFactory;
 import ui.gui.LabelFactory;
@@ -15,6 +18,7 @@ import ui.gui.PasswordVaultGUI;
 
 import java.util.*;
 
+// Remove an account from a UserProfile on the GUI - Panel
 public class RemoveAccountPanel extends Panel implements ActionListener {
     private MainPanel main;
     private JButton account;
@@ -22,19 +26,29 @@ public class RemoveAccountPanel extends Panel implements ActionListener {
     private JTextField username;
     private JTextField website;
     private HorizontalButtonPanel buttons;
+    private JLabel successImage;
+    private ImageHandler image;
+    private ImageIcon imageSkull;
 
+    // Constructor
     public RemoveAccountPanel(PasswordVaultGUI passVault, MainPanel main) {
         super(passVault);
         this.main = main;
 
-        this.setLayout(new GridLayout(4, 1));
+        this.setLayout(new GridLayout(5, 1));
         this.add(LabelFactory.createLabel("Enter account information below: ", true));
         textInit();
         buttonInit();
+        image = new ImageHandler();
+        imageSkull = image.getImage("images/skull.png", 100, 75);
+        successImage = new JLabel(imageSkull);
+        this.add(successImage);
         this.setPreferredSize(getPreferredSize());
-
+        successImage.setIcon(null);
     }
 
+    // MODIFIES: this
+    // EFFECTS: add text to panel after initialized
     private void initLabelTextPairs(JLabel label, JTextField textfield) {
         List<Component> listComp = new ArrayList<>();
         listComp.add(label);
@@ -43,6 +57,8 @@ public class RemoveAccountPanel extends Panel implements ActionListener {
         this.add(panel);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initialize text labels
     private void textInit() {
         JLabel userLabel = LabelFactory.createLabel("Username:", 50, 150, 100, 20);
         username = new JTextField();
@@ -73,6 +89,12 @@ public class RemoveAccountPanel extends Panel implements ActionListener {
             String user = username.getText();
             String websiteName = website.getText();
             passVault.removeAccount(user, websiteName);
+            successImage.setIcon(imageSkull);
+            Timer timer = new Timer(1000, time -> {
+                successImage.setIcon(null);
+            });
+            timer.setRepeats(false);
+            timer.start();
             main.refreshPanel();
             username.setText("");
             website.setText("");
