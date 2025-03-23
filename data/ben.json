@@ -16,6 +16,30 @@
             },
             "password": {"password": "uvFuso87IwlKvZFmmSzIC1"},
             "username": "ben"
+        },
+        {
+            "website": {
+                "nameWebsite": "netflix",
+                "url": "netflix.com"
+            },
+            "password": {"password": "24IXfO9basy3YohV84TdC1"},
+            "username": "bensnet"
+        },
+        {
+            "website": {
+                "nameWebsite": "netflix",
+                "url": "netflix.com"
+            },
+            "password": {"password": "SYd0eNvInpEWEXHdg!nMC1"},
+            "username": "bensnet2"
+        },
+        {
+            "website": {
+                "nameWebsite": "amazon",
+                "url": "amazon"
+            },
+            "password": {"password": "D1F8#Ow*OLmfUvntJ&AeC1"},
+            "username": "bensam"
         }
     ],
     "user": "ben"
