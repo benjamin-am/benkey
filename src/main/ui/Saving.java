@@ -45,7 +45,7 @@ public class Saving {
             write.write(user);
             write.close();
         } catch (FileNotFoundException e) {
-            
+            System.out.println("Username contains illegal character.");
         }        
     }
 
