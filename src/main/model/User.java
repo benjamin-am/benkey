@@ -229,4 +229,9 @@ public class User implements Writable {
         return generated;
     }
 
+    // EFFECTS: check if user has any accounts
+    public boolean userHasNoAccounts() {
+        return totalAccounts() == 0;
+    }
+
 }

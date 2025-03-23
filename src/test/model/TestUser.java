@@ -44,6 +44,20 @@ public class TestUser {
     }
 
     @Test
+    void testUserHasNoAccounts() {
+        assertTrue(u1.userHasNoAccounts());
+        u1.addAccount(a1);
+        assertFalse(u1.userHasNoAccounts());
+        u1.addAccount(a2);
+        u1.addAccount(a3);
+        assertFalse(u1.userHasNoAccounts());
+        u1.removeAccount(a1);
+        u1.removeAccount(a2);
+        u1.removeAccount(a3);
+        assertTrue(u1.userHasNoAccounts());
+    }
+
+    @Test
     void testMaxAccounts() {
         assertNull(u1.maxAccountsWebsite());
         u1.addAccount(a1);
