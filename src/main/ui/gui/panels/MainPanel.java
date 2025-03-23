@@ -16,6 +16,7 @@ public class MainPanel extends Panel {
     private static final String ACCOUNT = "account";
     private static final String ADD = "add";
     private static final String REMOVE = "remove";
+    private static final String WEBSITE = "website";
 
 
     public MainPanel(PasswordVaultGUI passVault) {
@@ -34,6 +35,7 @@ public class MainPanel extends Panel {
         panels.put(ACCOUNT, new AccountPanel(passVault, this));
         panels.put(ADD, new AddAccountPanel(passVault, this));
         panels.put(REMOVE, new RemoveAccountPanel(passVault, this));
+        panels.put(WEBSITE, new WebsitePanel(passVault, this));
     }
 
     // EFFECTS: returns panel from collection
@@ -74,6 +76,10 @@ public class MainPanel extends Panel {
 
     public static String getRemove() {
         return REMOVE;
+    }
+
+    public static String getWebsite() {
+        return WEBSITE;
     }
 
     @Override 

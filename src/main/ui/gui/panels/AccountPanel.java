@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import model.Account;
 import model.User;
@@ -20,7 +21,7 @@ import ui.gui.PasswordVaultGUI;
 
 // Main account view panel
 public class AccountPanel extends Panel {
-    private String[] colNames = {"Username", "Website", "Password"};
+    private String[] colNames;
     private MainPanel main;
     private HorizontalButtonPanel buttonPanel;
     private JTable table;
@@ -31,6 +32,7 @@ public class AccountPanel extends Panel {
     // Constructor
     public AccountPanel(PasswordVaultGUI passVault, MainPanel main) {
         super(passVault);
+        this.colNames = new String[]{"Username", "Website", "Password"};
         this.main = main;
         this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
@@ -64,6 +66,9 @@ public class AccountPanel extends Panel {
     private void tablePreferences(JTable table) {
         table.setBackground(new Color(40, 44, 52)); 
         table.setForeground(Color.WHITE); 
+        
+        table.setAutoCreateRowSorter(true);
+        table.getRowSorter().toggleSortOrder(1);
 
         table.setSelectionBackground(new Color(60, 63, 65)); // Slightly lighter grey/blue
         table.setSelectionForeground(Color.WHITE);
@@ -81,7 +86,7 @@ public class AccountPanel extends Panel {
     // EFFECTS: refreshes panel after a modification
     @Override
     public void refreshPanel() {
-        table.setModel(new javax.swing.table.DefaultTableModel(accountsToArray(), colNames));
+        table.setModel(new DefaultTableModel(accountsToArray(), colNames));
         sp.setPreferredSize(new Dimension(600, 300)); 
         message.setText("<html><p>You have " + passVault.getUser().totalAccounts() 
                 + " accounts for " 

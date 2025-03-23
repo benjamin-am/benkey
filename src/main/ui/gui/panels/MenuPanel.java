@@ -30,6 +30,7 @@ public class MenuPanel extends Panel {
         account.addActionListener(e -> main.changeScreen(MainPanel.getAccount()));
         passwords = ButtonFactory.createButton("Passwords", 0, 0, 200, 50, false);
         website = ButtonFactory.createButton("Websites", 0, 0, 200, 50, false);
+        website.addActionListener(e -> main.changeScreen(MainPanel.getWebsite()));
         save = ButtonFactory.createButton("Save", 0, 0, 200, 50, false);
         save.addActionListener(e -> Saving.saveAccount(passVault.getUser()));
         logout = ButtonFactory.createButton("Logout", 0, 0, 200, 50, false);
