@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 
 import ui.gui.PasswordVaultGUI;
 
-public class HorizontalLabelTextFieldPanel extends Panel{
+public class HorizontalLabelTextFieldPanel extends Panel {
     List<Component> comps;
     BoxLayout boxLayout;
 

@@ -60,7 +60,7 @@ public class MainPanel extends Panel {
     }
 
       // Getters
-      public static String getBase() {
+    public static String getBase() {
         return BASE;
     }
 
