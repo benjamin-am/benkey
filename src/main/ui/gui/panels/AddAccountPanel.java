@@ -30,7 +30,7 @@ public class AddAccountPanel extends Panel implements ActionListener {
     private JLabel successImage;
     private ImageIcon imageCheck;
 
-    // Constructor
+    // EFFECTS: initializes Add Account Panel construction with GridLayout
     public AddAccountPanel(PasswordVaultGUI passVault, MainPanel main) {
         super(passVault);
         this.main = main;
@@ -85,6 +85,7 @@ public class AddAccountPanel extends Panel implements ActionListener {
         this.add(buttons);
     }
 
+    // MODIFIES: this
     // EFFECTS: Performs actions on buttons
     // ATTRIBUTION: timer so you can see success message https://stackoverflow.com/questions/1006611/java-swing-timer
     @Override

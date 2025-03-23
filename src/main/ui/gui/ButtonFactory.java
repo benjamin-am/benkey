@@ -33,6 +33,8 @@ public class ButtonFactory {
         return button;
     }
 
+    // MODIFIES: button
+    // EFFECTS: sets bounds of button, sets font, and other defaults
     private static void setBoundsFontFocus(int x, int y, int width, int height, JButton button) {
         button.setBounds(x, y, width, height);
         button.setPreferredSize(new Dimension(width, height));

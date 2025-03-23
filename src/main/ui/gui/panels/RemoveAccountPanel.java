@@ -30,7 +30,7 @@ public class RemoveAccountPanel extends Panel implements ActionListener {
     private ImageHandler image;
     private ImageIcon imageSkull;
 
-    // Constructor
+    // EFFECTS: initializes RemoveAccountPanel construction, initial values set and components added
     public RemoveAccountPanel(PasswordVaultGUI passVault, MainPanel main) {
         super(passVault);
         this.main = main;
@@ -82,7 +82,8 @@ public class RemoveAccountPanel extends Panel implements ActionListener {
         this.add(buttons);
     }
 
-    // EFFECTS: Performs actions on buttons
+    // MODIFIES: user
+    // EFFECTS: Removes account from account list of user
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == account) {

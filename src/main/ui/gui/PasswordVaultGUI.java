@@ -18,7 +18,7 @@ import ui.gui.panels.Panel;
 // https://stackoverflow.com/questions/17477891/how-do-i-use-cardlayout-for-my-java-program-for-login-and-menu-items
 // https://www.youtube.com/watch?v=XBFT0N-Qbm4
 public class PasswordVaultGUI extends JFrame {
-    private Defaults defaults = Defaults.getDefaults();
+    // private Defaults defaults = Defaults.getDefaults();
     private boolean loggedIn;
     private User user;
     private Map<String, Panel> panels;
@@ -132,12 +132,13 @@ public class PasswordVaultGUI extends JFrame {
         return user.getUsername();
     }
 
-    public void setLoggedIn(boolean status) {
-        this.loggedIn = status;
-    }
-
     public Boolean getLoggedIn() {
         return loggedIn;
+    }
+
+    // setters
+    public void setLoggedIn(boolean status) {
+        this.loggedIn = status;
     }
 
 }

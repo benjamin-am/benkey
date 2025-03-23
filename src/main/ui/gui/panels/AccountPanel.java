@@ -29,17 +29,15 @@ public class AccountPanel extends Panel {
     private JLabel message;
     private GridBagConstraints gbc;
 
-    // Constructor
+    // EFFECTS: initializes Account Panel construction with GridBagLayout
     public AccountPanel(PasswordVaultGUI passVault, MainPanel main) {
         super(passVault);
         this.colNames = new String[]{"Username", "Website", "Password"};
         this.main = main;
         this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
-        // this.setPreferredSize(getPreferredSize());
         
         table = new JTable(accountsToArray(), colNames);
-        // table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         sp = new JScrollPane(table);
         sp.setPreferredSize(new Dimension(600, 300)); 
         tablePreferences(table);
@@ -70,7 +68,7 @@ public class AccountPanel extends Panel {
         table.setAutoCreateRowSorter(true);
         table.getRowSorter().toggleSortOrder(1);
 
-        table.setSelectionBackground(new Color(60, 63, 65)); // Slightly lighter grey/blue
+        table.setSelectionBackground(new Color(60, 63, 65)); 
         table.setSelectionForeground(Color.WHITE);
 
         table.setGridColor(new Color(75, 80, 90));

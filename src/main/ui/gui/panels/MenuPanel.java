@@ -8,6 +8,7 @@ import ui.Saving;
 import ui.gui.ButtonFactory;
 import ui.gui.PasswordVaultGUI;
 
+// Buttons to select what panel to show in the Main Panel
 public class MenuPanel extends Panel {
     BoxLayout boxLayout;
     JButton account;
@@ -17,6 +18,7 @@ public class MenuPanel extends Panel {
     MainPanel main;
     JButton save;
 
+    // EFFECTS: initializes Menu Panel construction, initial values set and components added
     public MenuPanel(PasswordVaultGUI passVault, MainPanel main) {
         super(passVault, 100, 500);
         this.main = main;
@@ -25,6 +27,8 @@ public class MenuPanel extends Panel {
         buttonInit();
     }
 
+    // MODIFIES: this
+    // EFFECTS: initialize and add buttons to panel
     private void buttonInit() {
         account = ButtonFactory.createButton("Accounts", 0, 0, 200, 50, false);
         account.addActionListener(e -> main.changeScreen(MainPanel.getAccount()));
@@ -42,11 +46,15 @@ public class MenuPanel extends Panel {
         addButton(logout);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds buttons to panel
     private void addButton(JButton button) {
         addSpace();
         this.add(button);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds space to panel
     private void addSpace() {
         this.add(Box.createVerticalStrut(5)); 
     }

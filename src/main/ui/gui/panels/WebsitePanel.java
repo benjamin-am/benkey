@@ -17,12 +17,13 @@ import ui.gui.ButtonFactory;
 import ui.gui.LabelFactory;
 import ui.gui.PasswordVaultGUI;
 
+// Table view of Websites that user has accounts for
 public class WebsitePanel extends TableViewPanel {
     private JLabel message;
     private String text;
 
-    // Constructs a website table panel
     // ATTRIBUTION: https://coderanch.com/t/346577/java/JTable-set-default-auto-sorted
+    // EFFECTS: initial website Panel constructon, sets up initial values
     public WebsitePanel(PasswordVaultGUI passVault, MainPanel main) {
         super(passVault, main);
         this.colNames = new String[]{"Website", "Number Accounts"};
@@ -32,15 +33,7 @@ public class WebsitePanel extends TableViewPanel {
         super.tablePreferences(table);
         table.setAutoCreateRowSorter(true);
         table.getRowSorter().toggleSortOrder(1);
-        text = "<html><p>You have " 
-                + passVault.getUser().totalAccounts() 
-                + " accounts for " 
-                + passVault.getUser().totalWebsites() 
-                + " websites.<br/> You have the most accounts for "
-                + passVault.getUser().maxAccountsWebsite().getName() + " with " 
-                + passVault.getUser().numberOfAccountsOnWebsite(passVault.getUser().maxAccountsWebsite()) 
-                + " accounts.</p></html>";
-        message = LabelFactory.createLabel(text);
+        initText();
         gbc.gridx = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
         gbc.gridy = 0;
@@ -50,6 +43,20 @@ public class WebsitePanel extends TableViewPanel {
         gbc.gridy = 1;
         this.add(message, gbc);
         buttonInit();
+    }
+
+    // MODIFIES: this
+    // EFFECTS: initialize text labels
+    private void initText() {
+        text = "<html><p>You have " 
+                + passVault.getUser().totalAccounts() 
+                + " accounts for " 
+                + passVault.getUser().totalWebsites() 
+                + " websites.<br/> You have the most accounts for "
+                + passVault.getUser().maxAccountsWebsite().getName() + " with " 
+                + passVault.getUser().numberOfAccountsOnWebsite(passVault.getUser().maxAccountsWebsite()) 
+                + " accounts.</p></html>";
+        message = LabelFactory.createLabel(text);
     }
 
     // ATTRIBUTION: https://coderanch.com/t/685520/java/Populate-JTable-ArrayList
@@ -71,7 +78,7 @@ public class WebsitePanel extends TableViewPanel {
     }
 
     // MODIFIES: this
-    // EFFECTS: button initalization
+    // EFFECTS: button initalization for panel, adds buttons to panel
     @Override
     public void buttonInit() {
         JButton back = ButtonFactory.createButton("Back", 0, 0, 200, 50, false);

@@ -14,7 +14,7 @@ public class LabelFactory {
         label.setMaximumSize(new Dimension(width, height));
     }
 
-      // EFFECTS: Creates a label with specified location and size
+    // EFFECTS: Creates a label with specified location and size
     public static JLabel createLabel(String text, int x, int y, int width, int height) {
         JLabel label = new JLabel(text);
         setSizing(x, y, width, height, label);

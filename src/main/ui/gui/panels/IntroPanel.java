@@ -18,7 +18,7 @@ public class IntroPanel extends Panel {
     private JButton accountButton;
     private ImageHandler image;
 
-    // Constructor
+    // EFFECTS: initializes Intro Panel construction, initial values set and components added
     public IntroPanel(PasswordVaultGUI passVault) {
         super(passVault);
         image = new ImageHandler();
@@ -62,6 +62,7 @@ public class IntroPanel extends Panel {
         accountButton.addActionListener(e -> passVault.changeScreen(PasswordVaultGUI.getNewAccount()));
     }
 
+    // MODIFIES: this
     // EFFECTS: sets up login button
     private void loginButtonInit() {
         loginButton = ButtonFactory.createButton("Login", 200, 100, 200, 50, false);

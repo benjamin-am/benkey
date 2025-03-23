@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import ui.gui.PasswordVaultGUI;
 
+// Main Panel is the main card layout that has access to the Users accounts, add panel, remove panel, website panel etc
 public class MainPanel extends Panel {
     private Map<String, Panel> panels;
     private CardLayout cl;
@@ -18,7 +19,7 @@ public class MainPanel extends Panel {
     private static final String REMOVE = "remove";
     private static final String WEBSITE = "website";
 
-
+    // EFFECTS: initializes Main Panel construction, initial values set and components added
     public MainPanel(PasswordVaultGUI passVault) {
         super(passVault);
         panels = new HashMap<>();
@@ -61,7 +62,7 @@ public class MainPanel extends Panel {
         cl.show(cardPanel, card);
     }
 
-      // Getters
+    // Getters
     public static String getBase() {
         return BASE;
     }
@@ -82,6 +83,8 @@ public class MainPanel extends Panel {
         return WEBSITE;
     }
 
+    // MODIFIES: this
+    // EFFECTS: refreshes all panels in collection
     @Override 
     public void refreshPanel() {
         for (Panel panel : panels.values()) {

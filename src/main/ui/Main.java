@@ -6,6 +6,7 @@ import ui.gui.PasswordVaultGUI;
 
 public class Main {
     private static Scanner scan;
+    
     public static void main(String[] args) throws Exception {
         scan = new Scanner(System.in);
         System.out.println("Launch UI or GUI? (answer U/G for respective interface)");

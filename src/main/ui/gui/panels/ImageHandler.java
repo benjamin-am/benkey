@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 // Handles image addition to panels
 public class ImageHandler {
 
-    // Constructor - nothing really needed
+    // EFFECTS: creates an ImageHandler object, doesnt initialize anything
     public ImageHandler() {
         
     }

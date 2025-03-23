@@ -9,11 +9,10 @@ import ui.gui.PasswordVaultGUI;
 
 // Baes Panel for the Password vault after sign in.
 public class BasePanel extends Panel {
-
     private FlowLayout fl = new FlowLayout();
     private JLabel baseMessage;
 
-    // Constructor
+    // EFFECTS: initializes Base Panel construction, initial values set and components added
     public BasePanel(PasswordVaultGUI passVault) {
         super(passVault);
         this.setLayout(fl);

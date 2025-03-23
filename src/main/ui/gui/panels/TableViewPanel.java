@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -19,13 +18,12 @@ public abstract class TableViewPanel extends Panel {
     protected GridBagConstraints gbc;
     protected HorizontalButtonPanel buttonPanel;
     
-    // Constructor
-    public TableViewPanel (PasswordVaultGUI passVault, MainPanel main) {
+    // EFFECTS: abstract constructor for a table view panel, inital values set
+    public TableViewPanel(PasswordVaultGUI passVault, MainPanel main) {
         super(passVault);
         this.main = main;
         this.setLayout(new GridBagLayout());
         gbc = new GridBagConstraints();
-
     }   
 
     // EFFECTS: converts a list to array for table view

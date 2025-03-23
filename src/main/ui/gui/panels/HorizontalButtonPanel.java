@@ -10,10 +10,12 @@ import javax.swing.JButton;
 
 import ui.gui.PasswordVaultGUI;
 
+// Creates a panel of Horizontally placed buttons
 public class HorizontalButtonPanel extends Panel {
     Map<String, JButton> buttons;
     BoxLayout boxLayout;
 
+    // EFFECTS: initializes HorizontalButtonPanel construction, initial values set and components added
     public HorizontalButtonPanel(PasswordVaultGUI passVault, List<JButton> buttons) {
         super(passVault);
         this.buttons = new HashMap<>();
@@ -23,6 +25,8 @@ public class HorizontalButtonPanel extends Panel {
 
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates the Panel with buttons on it, with the list of buttions provided
     private void buttonInit(List<JButton> buttons) {
         for (JButton button : buttons) {
             this.buttons.put(button.getText(), button);
@@ -30,16 +34,23 @@ public class HorizontalButtonPanel extends Panel {
         }
     }
 
+
     // REQUIRES: button.getText() is unique
+    // MODIFIES: this
+    // EFFECTS: adds button to buttons collection
     public void addButton(JButton button) {
         this.buttons.put(button.getText(), button);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds button to panel with space
     private void addButtonToPanel(JButton button) {
         addSpace();
         this.add(button);
     }
 
+    // MODIFIES: this
+    // EFFECTS: adds horizontal space
     private void addSpace() {
         this.add(Box.createHorizontalStrut(5)); 
     }

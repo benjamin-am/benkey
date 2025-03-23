@@ -36,7 +36,7 @@ public class LoginPanel extends Panel implements ActionListener {
     private GridBagConstraints gbc;
 
 
-    // EFFECTS: creates a LoginPanel JPanel
+    // EFFECTS: creates a LoginPanel JPanel, initial values and components are set
     public LoginPanel(PasswordVaultGUI passVault) {
         super(passVault);
         
@@ -58,6 +58,8 @@ public class LoginPanel extends Panel implements ActionListener {
         this.add(messageLabel, gbc);
     }
 
+    // MODIFIES: this
+    // EFFECTS: Creates text label and text field pairs to put on the panel
     private void initLabelTextPairs(JLabel label, JTextField textfield, int x, int y) {
         List<Component> listComp = new ArrayList<>();
         listComp.add(label);
@@ -70,6 +72,8 @@ public class LoginPanel extends Panel implements ActionListener {
         this.add(panel, gbc);
     }
 
+    // MODIFIES: this
+    // EFFECTS: initializes text set in panel
     private void textInit() {
         JLabel userLabel = LabelFactory.createLabel("Username:", 50, 150, 100, 20);
         JLabel passwordLabel = LabelFactory.createLabel("Password:", 50, 200, 100, 20);

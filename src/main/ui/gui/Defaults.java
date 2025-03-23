@@ -37,7 +37,7 @@ public class Defaults {
         return font;
     }
 
-    // EFFECTS: returns font
+    // EFFECTS: returns font for headers
     public Font getHeaderFont() {
         return headerFont;
     }
@@ -47,20 +47,22 @@ public class Defaults {
         return buttonColor;
     }
 
-    // EFFECTS: returns font
+    // EFFECTS: returns font color
     public Color getFontColor() {
         return fontColor;
     }
 
-    // EFFECTS: returns font
+    // EFFECTS: returns background color
     public Color getBackgroundColor() {
         return background;
     }
 
+    // EFFECTS: returns height
     public static int getHeight() {
         return HEIGHT;
     } 
     
+    // EFFECTS: returns width
     public static int getWidth() {
         return WIDTH;
     }

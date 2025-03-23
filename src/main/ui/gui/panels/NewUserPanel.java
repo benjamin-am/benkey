@@ -20,6 +20,7 @@ import ui.gui.ButtonFactory;
 import ui.gui.LabelFactory;
 import ui.gui.PasswordVaultGUI;
 
+// Create a new user profile, the panel
 public class NewUserPanel extends Panel implements ActionListener {
     private JButton backButton;
     private JButton account;
@@ -30,7 +31,7 @@ public class NewUserPanel extends Panel implements ActionListener {
     private GridBagConstraints gbc;
     private JLabel hiddenLabel;
 
-
+    // EFFECTS: initializes New User Panel construction, initial values set and components added
     public NewUserPanel(PasswordVaultGUI passVault) {
         super(passVault);
         gl = new GridBagLayout();
@@ -52,9 +53,10 @@ public class NewUserPanel extends Panel implements ActionListener {
         gbc.fill = GridBagConstraints.BOTH;
         hiddenLabel = LabelFactory.createLabel("", 0, 0, 400, 40);
         this.add(hiddenLabel, gbc);
-        // this.setPreferredSize(getPreferredSize());
     }
 
+    // MODIFIES: this
+    // EFFECTS sets up label and textfield pairs, adds them to panel
     private void initLabelTextPairs(JLabel label, JTextField textfield, int x, int y) {
         List<Component> listComp = new ArrayList<>();
         listComp.add(label);
@@ -66,6 +68,8 @@ public class NewUserPanel extends Panel implements ActionListener {
         this.add(panel, gbc);
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up text labels and text fields
     private void textInit() {
         JLabel userLabel = LabelFactory.createLabel("Username:");
         username = new JTextField();
@@ -77,7 +81,8 @@ public class NewUserPanel extends Panel implements ActionListener {
     }
 
 
-    // EFFECTS: sets up back button
+    // MODIFIES: this
+    // EFFECTS: sets up buttons and adds them to panel
     private void buttonInit() {
         backButton = ButtonFactory.createButton("Back", 200, 100, 100, 50, false);
         backButton.addActionListener(e -> passVault.changeScreen(PasswordVaultGUI.getIntro()));
@@ -92,6 +97,9 @@ public class NewUserPanel extends Panel implements ActionListener {
         this.add(buttons, gbc);
     }
 
+    // MODIFIES: user
+    // EFFECTS: creates a new user, sets it as the logged in user in the vault. 
+    //          If username already taken, then prompt to use another username
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == account) {

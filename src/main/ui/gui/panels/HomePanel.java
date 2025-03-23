@@ -1,17 +1,17 @@
 package ui.gui.panels;
 
-import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 
 import ui.gui.*;
 
+// Home Panel which displays the Main Panel on the right and the Menu Panel on the left
 public class HomePanel extends Panel {
     private GridBagLayout gl = new GridBagLayout();
     private MenuPanel menu;
     private MainPanel main;
 
+    // EFFECTS: initializes Home Panel construction, initial values set and components added
     public HomePanel(PasswordVaultGUI passVault) {
         super(passVault);
         this.setLayout(gl);
