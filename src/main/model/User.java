@@ -96,6 +96,20 @@ public class User implements Writable {
         return listAllWebsites().size();
     }
 
+
+    // EFFECTS: returns website with max (highest) accounts
+    public Website maxAccountsWebsite() {
+        int maxAccounts = 0;
+        Website maxWebsite = null;
+        for (Website website : listAllWebsites()) {
+            if (numberOfAccountsOnWebsite(website) > maxAccounts) {
+                maxWebsite = website;
+                maxAccounts = numberOfAccountsOnWebsite(website);
+            }
+        }
+        return maxWebsite;
+    }
+
     /* 
     EFFECTS: returns list of distinct websites user has an account for
     */

@@ -44,6 +44,23 @@ public class TestUser {
     }
 
     @Test
+    void testMaxAccounts() {
+        assertNull(u1.maxAccountsWebsite());
+        u1.addAccount(a1);
+        assertEquals(w2, u1.maxAccountsWebsite());
+
+        u1.addAccount(a2);
+        assertEquals(w2, u1.maxAccountsWebsite());
+
+        u1.addAccount(a3);
+        u1.addAccount(a5);
+
+        assertEquals(w2, u1.maxAccountsWebsite());
+        u1.addAccount(a4);
+        assertEquals(w1, u1.maxAccountsWebsite());
+    }
+
+    @Test
     void testWebsiteGen() {
         u1.addAccount(a1);
         u1.addAccount(a2);
