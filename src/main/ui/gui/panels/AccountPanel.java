@@ -42,11 +42,7 @@ public class AccountPanel extends Panel {
         sp.setPreferredSize(new Dimension(600, 300)); 
         tablePreferences(table);
 
-        message = LabelFactory.createLabel("<html><p>You have " 
-                + passVault.getUser().totalAccounts() 
-                + " accounts for " 
-                + passVault.getUser().totalWebsites() 
-                + " websites.<br/> Would you like to modify any accounts?</p></html>");
+        setMessage();
         
         gbc.gridx = 0;
         gbc.anchor = GridBagConstraints.FIRST_LINE_START;
@@ -57,6 +53,18 @@ public class AccountPanel extends Panel {
         gbc.gridy = 1;
         this.add(message, gbc);
         buttonInit();
+    }
+
+    private void setMessage() {
+        if (passVault.getUser().userHasNoAccounts()) {
+            message = LabelFactory.createLabel("You have no accounts! Make one!");
+        } else {
+            message = LabelFactory.createLabel("<html><p>You have " 
+                + passVault.getUser().totalAccounts() 
+                + " accounts for " 
+                + passVault.getUser().totalWebsites() 
+                + " websites.<br/> Would you like to modify any accounts?</p></html>");
+        }
     }
 
     // MODIFIES: this
@@ -124,7 +132,7 @@ public class AccountPanel extends Panel {
         for (Account account : accounts) {
             String pass = account.getPassword().getPassword();
             String username = account.getUsername();
-            String website = account.getWebsite().getUrl();
+            String website = account.getWebsite().getName();
             arr[i][0] = username;
             arr[i][1] = website;
             arr[i][2] = pass;

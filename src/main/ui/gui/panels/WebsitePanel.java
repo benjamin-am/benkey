@@ -48,7 +48,10 @@ public class WebsitePanel extends TableViewPanel {
     // MODIFIES: this
     // EFFECTS: initialize text labels
     private void initText() {
-        text = "<html><p>You have " 
+        if (passVault.getUser().userHasNoAccounts()) {
+            text = "You have no accounts!";
+        } else {
+            text = "<html><p>You have " 
                 + passVault.getUser().totalAccounts() 
                 + " accounts for " 
                 + passVault.getUser().totalWebsites() 
@@ -56,6 +59,7 @@ public class WebsitePanel extends TableViewPanel {
                 + passVault.getUser().maxAccountsWebsite().getName() + " with " 
                 + passVault.getUser().numberOfAccountsOnWebsite(passVault.getUser().maxAccountsWebsite()) 
                 + " accounts.</p></html>";
+        }
         message = LabelFactory.createLabel(text);
     }
 

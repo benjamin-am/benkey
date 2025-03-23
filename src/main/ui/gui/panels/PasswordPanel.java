@@ -23,16 +23,21 @@ public class PasswordPanel extends Panel {
     // MODIFIES: this
     // EFFECTS: creates the message with all passwords and count of distinct
     private void textInit() {
-        List<String> passwords = passVault.getUser().listAllPasswords();
+        if (passVault.getUser().userHasNoAccounts()) {
+            textLabel = LabelFactory.createLabel("You have no accounts thus no passwords!");
+        } else {
+            List<String> passwords = passVault.getUser().listAllPasswords();
         
-        StringBuilder text = new StringBuilder("<html><p>You have " + passwords.size() + " distinct passwords.<br/>"
-                                                + "Your passwords are: <br/>"
-                                                + "<br/>");
-        for (String password : passwords) {
-            text.append(password).append("<br/>");  
+            StringBuilder text = new StringBuilder("<html><p>You have " + passwords.size() + " distinct passwords.<br/>"
+                                                    + "Your passwords are: <br/>"
+                                                    + "<br/>");
+            for (String password : passwords) {
+                text.append(password).append("<br/>");  
+            }
+            text.append("</p></html>");
+            textLabel = LabelFactory.createLabel(text.toString());
         }
-        text.append("</p></html>");
-        textLabel = LabelFactory.createLabel(text.toString());
+
         this.add(textLabel);
     }
 
