@@ -18,6 +18,7 @@ import ui.gui.ButtonFactory;
 import ui.gui.LabelFactory;
 import ui.gui.PasswordVaultGUI;
 
+// Main account view panel
 public class AccountPanel extends Panel {
     private String[] colNames = {"Username", "Website", "Password"};
     private MainPanel main;
@@ -27,6 +28,7 @@ public class AccountPanel extends Panel {
     private JLabel message;
     private GridBagConstraints gbc;
 
+    // Constructor
     public AccountPanel(PasswordVaultGUI passVault, MainPanel main) {
         super(passVault);
         this.main = main;
@@ -57,6 +59,8 @@ public class AccountPanel extends Panel {
         buttonInit();
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets up table preferences and colours
     private void tablePreferences(JTable table) {
         table.setBackground(new Color(40, 44, 52)); 
         table.setForeground(Color.WHITE); 
@@ -73,6 +77,8 @@ public class AccountPanel extends Panel {
         sp.setBackground(new Color(40, 44, 52)); 
     }
 
+    // MODIFIES: this
+    // EFFECTS: refreshes panel after a modification
     @Override
     public void refreshPanel() {
         table.setModel(new javax.swing.table.DefaultTableModel(accountsToArray(), colNames));
@@ -104,6 +110,7 @@ public class AccountPanel extends Panel {
     }
 
     // ATTRIBUTION: https://coderanch.com/t/685520/java/Populate-JTable-ArrayList
+    // EFFECTS: transforms list from User into an array for viewing
     private String[][] accountsToArray() {
         User user = passVault.getUser();
         List<Account> accounts = user.getListOfAccounts();
