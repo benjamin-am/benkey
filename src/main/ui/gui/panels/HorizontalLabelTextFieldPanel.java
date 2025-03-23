@@ -12,8 +12,8 @@ import ui.gui.PasswordVaultGUI;
 
 // Creates a panel of Horizontally text fields and labels. Components in general
 public class HorizontalLabelTextFieldPanel extends Panel {
-    List<Component> comps;
-    BoxLayout boxLayout;
+    private List<Component> comps;
+    private BoxLayout boxLayout;
 
     // EFFECTS: initializes HorizontalButtonPanel construction, initial values set and components added
     public HorizontalLabelTextFieldPanel(PasswordVaultGUI passVault, List<Component> comps) {
@@ -21,7 +21,7 @@ public class HorizontalLabelTextFieldPanel extends Panel {
         this.comps = comps;
         boxLayout = new BoxLayout(this, BoxLayout.X_AXIS);
         this.setLayout(boxLayout);
-        compsInit(comps);
+        compsInit(this.comps);
     }
 
     // MODIFIES: this

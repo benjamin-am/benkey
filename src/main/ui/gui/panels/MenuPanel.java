@@ -10,13 +10,13 @@ import ui.gui.PasswordVaultGUI;
 
 // Buttons to select what panel to show in the Main Panel
 public class MenuPanel extends Panel {
-    BoxLayout boxLayout;
-    JButton account;
-    JButton passwords;
-    JButton website;
-    JButton logout;
-    MainPanel main;
-    JButton save;
+    private BoxLayout boxLayout;
+    private JButton account;
+    private JButton passwords;
+    private JButton website;
+    private JButton logout;
+    private MainPanel main;
+    private JButton save;
 
     // EFFECTS: initializes Menu Panel construction, initial values set and components added
     public MenuPanel(PasswordVaultGUI passVault, MainPanel main) {

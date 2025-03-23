@@ -12,8 +12,8 @@ import ui.gui.PasswordVaultGUI;
 
 // Creates a panel of Horizontally placed buttons
 public class HorizontalButtonPanel extends Panel {
-    Map<String, JButton> buttons;
-    BoxLayout boxLayout;
+    private Map<String, JButton> buttons;
+    private BoxLayout boxLayout;
 
     // EFFECTS: initializes HorizontalButtonPanel construction, initial values set and components added
     public HorizontalButtonPanel(PasswordVaultGUI passVault, List<JButton> buttons) {

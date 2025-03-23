@@ -55,6 +55,8 @@ public class AccountPanel extends Panel {
         buttonInit();
     }
 
+    // MODIFIES: this
+    // EFFECTS: sets the main message in the panel, checks if user has accounts first
     private void setMessage() {
         if (passVault.getUser().userHasNoAccounts()) {
             message = LabelFactory.createLabel("You have no accounts! Make one!");

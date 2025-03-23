@@ -11,8 +11,8 @@ public class Defaults {
     private Color fontColor;
     private Font headerFont;
     private Color buttonColor;
-    public static final int WIDTH = 900;
-    public static final int HEIGHT = 600;
+    private static final int WIDTH = 900;
+    private static final int HEIGHT = 600;
 
     // EFFECTS: initialize Defaults
     private Defaults() {
