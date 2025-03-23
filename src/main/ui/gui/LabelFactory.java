@@ -7,7 +7,14 @@ import javax.swing.JLabel;
 public class LabelFactory {
     private static Defaults defaults = Defaults.getDefaults();
     
-    // EFFECTS: Creates a label
+    // EFFECTS: sets the sizing of the given JLabel
+    private static void setSizing(int x, int y, int width, int height, JLabel label) {
+        label.setBounds(x, y, width, height);
+        label.setPreferredSize(new Dimension(width, height));
+        label.setMaximumSize(new Dimension(width, height));
+    }
+
+      // EFFECTS: Creates a label with specified location and size
     public static JLabel createLabel(String text, int x, int y, int width, int height) {
         JLabel label = new JLabel(text);
         setSizing(x, y, width, height, label);
@@ -15,13 +22,7 @@ public class LabelFactory {
         return label;
     }
 
-    private static void setSizing(int x, int y, int width, int height, JLabel label) {
-        label.setBounds(x, y, width, height);
-        label.setPreferredSize(new Dimension(width, height));
-        label.setMaximumSize(new Dimension(width, height));
-    }
-
-    // EFFECTS: creates a header label
+    // EFFECTS: creates a header label at specified location and size
     public static JLabel createLabel(String text, int x, int y, int width, int height, boolean header) {
         if (header) {
             JLabel label = new JLabel(text);
@@ -46,9 +47,16 @@ public class LabelFactory {
         }
     }
 
-    // EFFECTS: Creates a label
+    // EFFECTS: Creates a label with text in it
     public static JLabel createLabel(String text) {
         JLabel label = new JLabel(text);
+        fontAndColor(label);
+        return label;
+    }
+
+     // EFFECTS: Creates a label, with nothing in it
+    public static JLabel createLabel() {
+        JLabel label = new JLabel();
         fontAndColor(label);
         return label;
     }
@@ -57,12 +65,5 @@ public class LabelFactory {
     private static void fontAndColor(JLabel label) {
         label.setFont(defaults.getFont());
         label.setForeground(defaults.getFontColor());
-    }
-
-    // EFFECTS: Creates a label
-    public static JLabel createLabel() {
-        JLabel label = new JLabel();
-        fontAndColor(label);
-        return label;
     }
 }
