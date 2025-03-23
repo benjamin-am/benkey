@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
+import model.User;
 import ui.gui.ButtonFactory;
 import ui.gui.LabelFactory;
 import ui.gui.PasswordVaultGUI;
@@ -47,11 +48,22 @@ public class AddAccountPanel extends Panel implements ActionListener {
     }
 
     // MODIFIES: this
-    // EFFECTS: adds text to JPanel
+    // EFFECTS: adds text to JPanel by creating a horizontal panel
     private void initLabelTextPairs(JLabel label, JTextField textfield) {
         List<Component> listComp = new ArrayList<>();
         listComp.add(label);
         listComp.add(textfield);
+        HorizontalLabelTextFieldPanel panel = new HorizontalLabelTextFieldPanel(passVault, listComp);
+        this.add(panel);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds text to JPanel
+    private void initLabelTextButtonPairs(JLabel label, JTextField textfield, JButton button) {
+        List<Component> listComp = new ArrayList<>();
+        listComp.add(label);
+        listComp.add(textfield);
+        listComp.add(button);
         HorizontalLabelTextFieldPanel panel = new HorizontalLabelTextFieldPanel(passVault, listComp);
         this.add(panel);
     }
@@ -65,7 +77,11 @@ public class AddAccountPanel extends Panel implements ActionListener {
 
         JLabel passwordLabel = LabelFactory.createLabel("Password:", 50, 200, 100, 20);
         password = new JTextField();
-        initLabelTextPairs(passwordLabel, password);
+        JButton randomize = ButtonFactory.createButton("Randomize", 0, 0, 200, 25);
+        randomize.addActionListener(e -> {
+            password.setText(User.generateRandomPassword());
+        });
+        initLabelTextButtonPairs(passwordLabel, password, randomize);
 
         JLabel websiteLabel = LabelFactory.createLabel("Website:", 50, 200, 100, 20);
         website = new JTextField();
