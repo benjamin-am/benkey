@@ -16,6 +16,7 @@ public class User implements Writable {
     private String username;
     private Password password;
     private List<Account> accounts;
+    private EventLog el = EventLog.getInstance();
 
     /* 
     REQUIRES: a user's username and password must be stringlength > 0
@@ -26,6 +27,7 @@ public class User implements Writable {
         this.username = username;
         this.password = new Password(password);
         this.accounts = new ArrayList<>();
+        el.logEvent(new Event("Created new user " + username));
     }
 
  /* 
@@ -37,6 +39,7 @@ public class User implements Writable {
         this.username = username;
         this.password = password;
         this.accounts = new ArrayList<>();
+        el.logEvent(new Event("Accessed user " + username));
     }
 
     // getters
@@ -55,10 +58,12 @@ public class User implements Writable {
     // setters
     public void setUsername(String username) {
         this.username = username;
+        el.logEvent(new Event("Set new username to " + username));
     }
 
     public void setPassword(String pass) {
         this.password = new Password(pass);
+        el.logEvent(new Event("Set new password for " + username));
     }
 
     public void setAccountList(List<Account> accounts) {
@@ -72,6 +77,27 @@ public class User implements Writable {
     */
     public void addAccount(Account account) {
         this.accounts.add(account);
+        el.logEvent(new Event("Added account " 
+                    + account.getUsername() + " for website " 
+                    + account.getWebsite().getName() 
+                    + " for user " + username));
+    }
+
+    /* 
+    REQUIRES: can only add unique account name/website name pairs
+    MODIFIES: this
+    EFFECTS: adds account to the user's profile
+    */
+    public void addAccount(Account account, boolean readFromData) {
+        if (readFromData) {
+            this.accounts.add(account);
+            el.logEvent(new Event("Read account from json for " 
+                        + account.getUsername() + " for website " 
+                        + account.getWebsite().getName() 
+                        + " for user " + username));
+        } else {
+            addAccount(account);
+        }
     }
 
     /* 
@@ -80,6 +106,10 @@ public class User implements Writable {
     */
     public void removeAccount(Account account) {
         this.accounts.remove(account);
+        el.logEvent(new Event("Removed account " 
+                    + account.getUsername() + " for website " 
+                    + account.getWebsite().getName() 
+                    + " for user " + username));
     }
 
     /* 
@@ -126,7 +156,7 @@ public class User implements Writable {
 
     // EFFECTS: Returns count of accounts on a specific website
     public int numberOfAccountsOnWebsite(Website website) {
-        int count = 0; //stubs
+        int count = 0; 
         for (Account acc : accounts) {
             if (acc.getWebsite().equals(website)) {
                 count++;
@@ -162,14 +192,14 @@ public class User implements Writable {
     EFFECTS: returns list of distinct passwords in accounts
     */
     public List<String> listAllPasswords() {
-        return accounts.stream().map(a -> a.getPassword().getPassword()).distinct().collect(Collectors.toList()); //stub
+        return accounts.stream().map(a -> a.getPassword().getPassword()).distinct().collect(Collectors.toList()); 
     }
 
     /* 
     EFFECTS: returns list of account names
     */
     public List<String> listAllUsernames() {
-        return accounts.stream().map(a -> a.getUsername()).distinct().collect(Collectors.toList()); //stub
+        return accounts.stream().map(a -> a.getUsername()).distinct().collect(Collectors.toList()); 
     }
 
     /* 

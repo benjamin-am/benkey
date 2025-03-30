@@ -6,6 +6,8 @@ import java.io.PrintWriter;
 
 import org.json.JSONObject;
 
+import model.Event;
+import model.EventLog;
 import model.User;
 
 // Most of this class is based off of the JsonReader example from JsonSerializationDemo
@@ -32,6 +34,7 @@ public class JsonWriter {
     public void write(User user) {
         JSONObject json = user.toJson();
         saveToFile(json.toString(TAB));
+        EventLog.getInstance().logEvent(new Event("Saved " + user.getUsername() + "'s passwords to vault"));
     }
 
     // MODIFIES: this

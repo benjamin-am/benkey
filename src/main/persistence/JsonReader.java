@@ -79,6 +79,6 @@ public class JsonReader {
         Password pass = new Password();
         pass.setEncryptedPassword(password);
         Account account = new Account(site, username, pass);
-        user.addAccount(account);
+        user.addAccount(account, true);
     }
 }

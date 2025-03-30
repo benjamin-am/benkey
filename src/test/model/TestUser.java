@@ -275,6 +275,14 @@ public class TestUser {
     }
 
     @Test
+    void addAccountTest() {
+        u1.addAccount(a1, true);
+        u1.addAccount(a2, false);
+        assertEquals(a1, u1.getListOfAccounts().get(0));
+        assertEquals(a2, u1.getListOfAccounts().get(1));
+    }
+
+    @Test
     void testFindAccountWebsiteAccountName() {
         u1.addAccount(a1);
         u1.addAccount(a2);
