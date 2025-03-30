@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import java.awt.CardLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,6 +37,14 @@ public class PasswordVaultGUI extends JFrame {
         super("benkey");
         this.panels = new HashMap<>();
         initJFrame();
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                for (Event ev : EventLog.getInstance()) {
+                    System.out.println("---------------------------------------");
+                    System.out.println(ev);
+                }
+            }
+        });
     }
 
     // EFFECTS: Initialize the JFrame and panels for the GUI
@@ -107,8 +117,9 @@ public class PasswordVaultGUI extends JFrame {
     // EFFECTS: removes an account from user 
     public void removeAccount(String user, String website) {
         Account account = this.user.findAccountWebsiteAccountName(user, website);
-        this.user.removeAccount(account);
-
+        if (user != null) {
+            this.user.removeAccount(account);
+        }
     }
 
     // getters
