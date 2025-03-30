@@ -4,6 +4,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JLabel;
 
+import ui.gui.ImageHandler;
 import ui.gui.LabelFactory;
 import ui.gui.PasswordVaultGUI;
 

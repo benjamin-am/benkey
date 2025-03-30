@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import ui.gui.ButtonFactory;
+import ui.gui.ImageHandler;
 import ui.gui.LabelFactory;
 import ui.gui.PasswordVaultGUI;
 

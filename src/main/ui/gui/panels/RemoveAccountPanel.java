@@ -13,6 +13,7 @@ import javax.swing.Timer;
 
 
 import ui.gui.ButtonFactory;
+import ui.gui.ImageHandler;
 import ui.gui.LabelFactory;
 import ui.gui.PasswordVaultGUI;
 
@@ -89,6 +90,9 @@ public class RemoveAccountPanel extends Panel implements ActionListener {
         if (e.getSource() == account) {
             String user = username.getText();
             String websiteName = website.getText();
+            if (user == "" || websiteName == "") {
+                return;
+            }
             passVault.removeAccount(user, websiteName);
             successImage.setIcon(imageSkull);
             Timer timer = new Timer(1000, time -> {

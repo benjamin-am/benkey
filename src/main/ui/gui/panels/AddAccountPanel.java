@@ -15,6 +15,7 @@ import javax.swing.Timer;
 
 import model.User;
 import ui.gui.ButtonFactory;
+import ui.gui.ImageHandler;
 import ui.gui.LabelFactory;
 import ui.gui.PasswordVaultGUI;
 
@@ -110,6 +111,9 @@ public class AddAccountPanel extends Panel implements ActionListener {
             String user = username.getText();
             String pass = password.getText();
             String websiteName = website.getText();
+            if (user == "" || pass == "" || websiteName == "") {
+                return;
+            }
             passVault.addAccount(user, pass, websiteName); 
             successImage.setIcon(imageCheck);
             Timer timer = new Timer(1000, time -> {
