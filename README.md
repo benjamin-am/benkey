@@ -1,4 +1,3 @@
-# My Personal Project for CPSC 210
 # benkey
 benkey is a password management tool that provides all of a users passwords in a secure vault. 
 It will take in a users one password and give them access to all of their passwords, with the option of random generation, that they can use on any website or app. 

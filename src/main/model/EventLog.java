@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-// ATTRIBUTION: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git as per 
-// "Add these classes to your model package and do not modify them in any way, other than to fix checkstyle issues." in phase 4
-
 /**
  * Represents a log of alarm system events.
  * We use the Singleton Design Pattern to ensure that there is only

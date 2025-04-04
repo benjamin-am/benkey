@@ -13,9 +13,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-// ATTRIBUTION: https://github.students.cs.ubc.ca/CPSC210/AlarmSystem.git as per 
-// "Add these classes to your model package and do not modify them in any way, other than to fix checkstyle issues." in phase 4
-
 /**
  * Unit tests for the Event class
  */
